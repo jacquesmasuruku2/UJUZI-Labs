@@ -2,7 +2,7 @@
 
 ## Project info
 
-**URL pour le domaine que nous allons acheter pour ce site**: https://gomahub.com
+**URL du site quand le domaine sera acheté**: https://gomahub.com
 
 **Project**: GOMA HUB WEB3 - Innovation Center in DR Congo
 
