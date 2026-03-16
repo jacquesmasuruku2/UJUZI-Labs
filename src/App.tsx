@@ -1,0 +1,62 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/toaster";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { AuthProvider } from "@/hooks/useAuth";
+import Layout from "./components/Layout";
+import Index from "./pages/Index";
+import About from "./pages/About";
+import Events from "./pages/Events";
+import EventDetail from "./pages/EventDetail";
+import Projects from "./pages/Projects";
+import Community from "./pages/Community";
+import Resources from "./pages/Resources";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+import Partners from "./pages/Partners";
+import Contact from "./pages/Contact";
+import Validators from "./pages/Validators";
+import Documentation from "./pages/Documentation";
+import Tools from "./pages/Tools";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
+import NotFound from "./pages/NotFound";
+
+const queryClient = new QueryClient();
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <AuthProvider>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/events" element={<Events />} />
+              <Route path="/events/:id" element={<EventDetail />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/community" element={<Community />} />
+              <Route path="/resources" element={<Resources />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:id" element={<BlogPost />} />
+              <Route path="/partners" element={<Partners />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/validators" element={<Validators />} />
+              <Route path="/documentation" element={<Documentation />} />
+              <Route path="/tools" element={<Tools />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Layout>
+        </AuthProvider>
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
+
+export default App;
