@@ -26,6 +26,31 @@ const Resources = () => {
     ]},
   ];
 
+  const galleryEvents = [
+    {
+      title: "Cardano Summit 2022",
+      subtitle: "Blockchain and its opportunities for Africa",
+      date: "30 July 2026",
+      description:
+        "À Goma Hub Web3, nous avons rassemblé des builders, étudiants et entrepreneurs pour explorer l’écosystème Cardano et les opportunités concrètes du Web3 en Afrique. Entre échanges avec des experts, partages d’expériences et démonstrations, cette rencontre a surtout mis l’accent sur l’apprentissage, la collaboration et le passage à l’action autour de projets locaux.",
+      images: Array.from({ length: 6 }).map((_, i) => ({
+        alt: `Wada Burkina Faso Hub — photo ${i + 1}`,
+        imageUrl: `https://via.placeholder.com/900x650?text=Event+1+Photo+${i + 1}`,
+      })),
+    },
+    {
+      title: "Cardano Africa Tech Summit",
+      subtitle: "Inauguration of Wada Burkina Faso Hub",
+      date: "2026",
+      description:
+        "Cette édition a mis en lumière la vision de Goma Hub Web3 : bâtir un centre d’excellence où les talents apprennent, expérimentent et développent des solutions blockchain utiles à notre région. Au programme : panels, networking, ateliers pratiques et mise en relation avec des mentors pour accélérer l’incubation des projets portés par la communauté.",
+      images: Array.from({ length: 6 }).map((_, i) => ({
+        alt: `Inauguration — photo ${i + 1}`,
+        imageUrl: `https://via.placeholder.com/900x650?text=Event+2+Photo+${i + 1}`,
+      })),
+    },
+  ];
+
   return (
     <div>
       <section className="py-20 hero-gradient">
@@ -56,6 +81,63 @@ const Resources = () => {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section id="gallery" className="py-16 bg-card/30">
+        <div className="container mx-auto px-4">
+          <div className="mb-10 text-center">
+            <h2 className="font-display text-3xl font-bold mb-3">
+              Galerie du Hub
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Découvrez quelques moments clés de Goma Hub Web3&nbsp;: événements, ateliers et temps forts avec la communauté.
+            </p>
+          </div>
+
+          <div className="space-y-12">
+            {galleryEvents.map((event, eventIndex) => (
+              <motion.div
+                key={`${event.title}-${eventIndex}`}
+                {...fadeUp}
+                transition={{ ...fadeUp.transition, delay: eventIndex * 0.1 }}
+                className="glass rounded-xl p-6 md:p-8"
+              >
+                <div className="text-center max-w-3xl mx-auto">
+                  <h3 className="font-display text-2xl md:text-3xl font-bold">
+                    {event.title}
+                  </h3>
+                  <p className="text-muted-foreground mt-2 text-lg">
+                    {event.subtitle}
+                  </p>
+                  <p className="text-sm text-muted-foreground mt-3">
+                    {event.date}
+                  </p>
+                  <p className="text-muted-foreground mt-6 text-center leading-relaxed">
+                    {event.description}
+                  </p>
+                </div>
+
+                <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {event.images.map((img, imgIndex) => (
+                    <div
+                      key={`${eventIndex}-${imgIndex}`}
+                      className="glass rounded-lg overflow-hidden hover:border-primary/30 transition-colors"
+                    >
+                      <div className="relative aspect-[4/3] overflow-hidden">
+                        <img
+                          src={img.imageUrl}
+                          alt={img.alt}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-import WalletConnect from "@/components/WalletConnect";
+import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo.png";
 
 interface NavGroup {
@@ -42,6 +42,7 @@ const Navbar = () => {
         { key: "blog", path: "/blog" },
         { key: "documentation", path: "/documentation" },
         { key: "tools", path: "/tools" },
+        { key: "gallery", path: "/resources#gallery" },
       ],
     },
     {
@@ -90,7 +91,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden lg:flex items-center gap-1">
+        <div className="hidden lg:flex items-center gap-1 flex-1 justify-center">
           {navGroups.map((item, idx) =>
             isGroup(item) ? (
               <div
@@ -135,12 +136,16 @@ const Navbar = () => {
               </Link>
             )
           )}
-          <WalletConnect />
+        </div>
+
+        <div className="hidden lg:flex items-center gap-2">
+          <ThemeToggle />
           <LanguageSwitcher />
         </div>
 
         {/* Mobile toggle */}
         <div className="flex items-center gap-2 lg:hidden">
+          <ThemeToggle />
           <LanguageSwitcher />
           <Button variant="ghost" size="icon" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -194,9 +199,6 @@ const Navbar = () => {
                 </Link>
               )
             )}
-            <div className="pt-2">
-              <WalletConnect />
-            </div>
           </div>
         </div>
       )}
