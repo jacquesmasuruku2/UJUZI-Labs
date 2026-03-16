@@ -13,9 +13,9 @@ const Partners = () => {
     { name: "Cardano Foundation", type: "Blockchain Protocol", description: t("partners.p1Desc") },
     { name: "Apex Fusion", type: "Blockchain Protocol", description: t("partners.p2Desc") },
     { name: "Safrochain", type: "Blockchain Protocol", description: t("partners.p3Desc") },
-    { name: "UNICEF Innovation", type: "Organization", description: t("partners.p4Desc") },
+    { name: "WADA", type: "Blockhain Organization", description: t("partners.p4Desc") },
     { name: "Africa Blockchain Institute", type: "Organization", description: t("partners.p5Desc") },
-    { name: "ULPGL University", type: "University", description: t("partners.p6Desc") },
+    { name: "ISDR-GL University", type: "University", description: t("partners.p6Desc") },
   ];
 
   return (
