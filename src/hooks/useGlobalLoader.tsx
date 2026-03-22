@@ -8,10 +8,11 @@ export const useGlobalLoader = () => {
   useEffect(() => {
     setIsLoading(true);
     
-    // 3 secondes exactes pour correspondre à la durée du compteur
+    // Réduire à 1.5 secondes pour une meilleure expérience utilisateur
+    // Le scroll est déjà autorisé, donc pas besoin d'attendre longtemps
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, [location.pathname]);

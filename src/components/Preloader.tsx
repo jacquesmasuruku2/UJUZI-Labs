@@ -9,13 +9,14 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
   const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Bloquer le défilement pendant le chargement
-    document.body.style.overflow = 'hidden';
+    // NE PAS bloquer le défilement pendant le chargement
+    // Permettre aux utilisateurs de scroller immédiatement
+    // document.body.style.overflow = 'hidden'; // Ligne commentée
 
     const tl = gsap.timeline({
       onComplete: () => {
-        // Réactiver le défilement après la transition
-        document.body.style.overflow = '';
+        // Le défilement est déjà autorisé, pas besoin de le réactiver
+        // document.body.style.overflow = '';
         onComplete();
       }
     });
@@ -71,8 +72,8 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
     });
 
     return () => {
-      // Nettoyage : réactiver le défilement si le composant est démonté
-      document.body.style.overflow = '';
+      // Nettoyage : le défilement est déjà autorisé, pas besoin de le réactiver
+      // document.body.style.overflow = '';
       tl.kill();
     };
   }, [onComplete]);
