@@ -2,18 +2,25 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowRight, Users, Calendar, Rocket, Award, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import SectionHeading from "@/components/SectionHeading";
-import heroBg from "@/assets/hero-bg.jpg";
+import { ArrowRight, Users, Calendar, Rocket, Award, ChevronRight, MapPin } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import CustomButton from "@/components/ui/CustomButton";
+import EventCard from "@/components/ui/EventCard";
+import SectionWrapper from "@/components/ui/SectionWrapper";
+import SectionHeading from "@/components/SectionHeading";
 
-const fadeUp = {
+const heroVariants = {
+  initial: { opacity: 0, y: 40 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.8 }
+};
+
+const fadeInUpVariants = {
   initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
+  animate: { opacity: 1, y: 0 },
   viewport: { once: true },
-  transition: { duration: 0.6 },
+  transition: { duration: 0.6 }
 };
 
 const Index = () => {
@@ -30,9 +37,27 @@ const Index = () => {
   ];
 
   const upcomingEvents = [
-    { title: t("events.event1Title"), date: "March 25, 2026", type: "Workshop", location: "Goma Innovation Center" },
-    { title: t("events.event2Title"), date: "April 10, 2026", type: "Hackathon", location: "Virunga Tech Park" },
-    { title: t("events.event3Title"), date: "April 20, 2026", type: "Meetup", location: "Goma Hub HQ" },
+    { 
+      title: t("events.event1Title"), 
+      date: "25 Mars 2026", 
+      type: "Workshop", 
+      location: "Goma Innovation Center",
+      time: "14:00 - 18:00"
+    },
+    { 
+      title: t("events.event2Title"), 
+      date: "10 Avril 2026", 
+      type: "Hackathon", 
+      location: "Virunga Tech Park",
+      time: "09:00 - 20:00"
+    },
+    { 
+      title: t("events.event3Title"), 
+      date: "20 Avril 2026", 
+      type: "Meetup", 
+      location: "Goma Hub HQ",
+      time: "17:00 - 19:00"
+    },
   ];
 
   const projects = [
@@ -62,147 +87,198 @@ const Index = () => {
   };
 
   return (
-    <div>
-      {/* Hero */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0">
-          <img src={heroBg} alt="Goma Web3" className="w-full h-full object-cover opacity-40" />
-          <div className="absolute inset-0 hero-gradient" />
-          <div className="absolute inset-0 grid-pattern opacity-30" />
-        </div>
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-sm text-primary mb-6">
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <SectionWrapper padding="xl" className="relative overflow-hidden">
+        <div className="absolute inset-0 hero-gradient" />
+        <div className="absolute inset-0 grid-pattern opacity-30" />
+        
+        <div className="relative z-10">
+          <motion.div {...heroVariants} className="max-w-4xl mx-auto text-center">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8"
+            >
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
               {t("hero.badge")}
-            </div>
-            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+            </motion.div>
+            
+            <motion.h1 
+              {...heroVariants}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 font-display"
+            >
               {t("hero.title1")}{" "}
               <span className="gradient-text">{t("hero.title2")}</span>{" "}
               {t("hero.title3")}
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl">{t("hero.subtitle")}</p>
-            <div className="flex flex-wrap gap-4">
-              <Button variant="glow" size="lg" asChild>
-                <Link to="/community">{t("hero.joinBtn")} <ArrowRight className="ml-2 h-4 w-4" /></Link>
-              </Button>
-              <Button variant="outline-glow" size="lg" asChild>
+            </motion.h1>
+            
+            <motion.p 
+              {...heroVariants}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-lg md:text-xl text-muted-foreground mb-10 max-w-3xl mx-auto"
+            >
+              {t("hero.subtitle")}
+            </motion.p>
+            
+            <motion.div 
+              {...heroVariants}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
+              <CustomButton size="lg" asChild>
+                <Link to="/community">
+                  {t("hero.joinBtn")} <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </CustomButton>
+              <CustomButton variant="outline" size="lg" asChild>
                 <Link to="/events">{t("hero.eventsBtn")}</Link>
-              </Button>
-            </div>
+              </CustomButton>
+            </motion.div>
           </motion.div>
         </div>
-      </section>
+      </SectionWrapper>
 
-      {/* Stats */}
-      <section className="py-16 border-y border-border">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, i) => (
-              <motion.div key={i} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.1 }} className="text-center">
-                <stat.icon className="h-8 w-8 text-primary mx-auto mb-3" />
-                <div className="font-display text-3xl font-bold glow-text">{stat.value}</div>
-                <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
+      {/* Stats Section */}
+      <SectionWrapper background="gray" padding="md">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {stats.map((stat, i) => (
+            <motion.div 
+              key={i} 
+              {...fadeInUpVariants} 
+              transition={{ ...fadeInUpVariants.transition, delay: i * 0.1 }} 
+              className="text-center"
+            >
+              <stat.icon className="h-8 w-8 text-primary mx-auto mb-3" />
+              <div className="text-3xl font-bold text-foreground font-display">{stat.value}</div>
+              <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </SectionWrapper>
 
       {/* About Preview */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
-            <SectionHeading title={t("home.whatTitle")} subtitle={t("home.whatSubtitle")} />
-            <p className="text-muted-foreground mb-8">{t("home.whatDesc")}</p>
-            <Button variant="outline-glow" asChild>
-              <Link to="/about">{t("home.learnMore")} <ChevronRight className="ml-1 h-4 w-4" /></Link>
-            </Button>
-          </motion.div>
-        </div>
-      </section>
+      <SectionWrapper padding="xl">
+        <motion.div {...fadeInUpVariants} className="max-w-3xl mx-auto text-center">
+          <SectionHeading 
+            title={t("home.whatTitle")} 
+            subtitle={t("home.whatSubtitle")} 
+          />
+          <p className="text-muted-foreground mb-8 text-lg">{t("home.whatDesc")}</p>
+          <CustomButton variant="outline" asChild>
+            <Link to="/about">
+              {t("home.learnMore")} <ChevronRight className="ml-1 h-4 w-4" />
+            </Link>
+          </CustomButton>
+        </motion.div>
+      </SectionWrapper>
 
-      {/* Events */}
-      <section className="py-20 bg-card/30">
-        <div className="container mx-auto px-4">
-          <SectionHeading title={t("home.upcomingTitle")} subtitle={t("home.upcomingSubtitle")} />
-          <div className="grid md:grid-cols-3 gap-6">
-            {upcomingEvents.map((event, i) => (
-              <motion.div key={i} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.15 }} className="glass rounded-xl p-6 hover:border-primary/30 transition-colors">
-                <span className="text-xs font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">{event.type}</span>
-                <h3 className="font-display text-xl font-semibold mt-4 mb-2">{event.title}</h3>
-                <p className="text-sm text-muted-foreground mb-1">{event.date}</p>
-                <p className="text-sm text-muted-foreground">{event.location}</p>
-                <Button variant="link" className="mt-4 p-0 h-auto text-primary">
-                  {t("home.register")} <ArrowRight className="ml-1 h-3 w-3" />
-                </Button>
-              </motion.div>
-            ))}
-          </div>
-          <div className="text-center mt-8">
-            <Button variant="outline-glow" asChild>
-              <Link to="/events">{t("home.viewAllEvents")}</Link>
-            </Button>
-          </div>
+      {/* Events Section */}
+      <SectionWrapper background="gray" padding="xl">
+        <SectionHeading 
+          title={t("home.upcomingTitle")} 
+          subtitle={t("home.upcomingSubtitle")} 
+        />
+        <div className="grid md:grid-cols-3 gap-6">
+          {upcomingEvents.map((event, i) => (
+            <EventCard key={i} delay={i * 0.15}>
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-xs font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
+                  {event.type}
+                </span>
+                <span className="text-xs text-muted-foreground">{event.time}</span>
+              </div>
+              <h3 className="text-xl font-semibold mb-2 font-display">{event.title}</h3>
+              <div className="space-y-1 mb-4">
+                <p className="text-sm text-muted-foreground flex items-center gap-1">
+                  <Calendar className="h-3 w-3" />
+                  {event.date}
+                </p>
+                <p className="text-sm text-muted-foreground flex items-center gap-1">
+                  <MapPin className="h-3 w-3" />
+                  {event.location}
+                </p>
+              </div>
+              <CustomButton variant="outline" size="sm" className="w-full">
+                {t("home.register")} <ArrowRight className="ml-1 h-3 w-3" />
+              </CustomButton>
+            </EventCard>
+          ))}
         </div>
-      </section>
+        <div className="text-center mt-8">
+          <CustomButton variant="outline" asChild>
+            <Link to="/events">{t("home.viewAllEvents")}</Link>
+          </CustomButton>
+        </div>
+      </SectionWrapper>
 
-      {/* Projects */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <SectionHeading title={t("home.projectsTitle")} subtitle={t("home.projectsSubtitle")} />
-          <div className="grid md:grid-cols-3 gap-6">
-            {projects.map((project, i) => (
-              <motion.div key={i} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.15 }} className="glass rounded-xl p-6 hover:border-primary/30 transition-colors">
-                <span className="text-xs font-medium text-accent bg-accent/10 px-3 py-1 rounded-full">{project.category}</span>
-                <h3 className="font-display text-xl font-semibold mt-4 mb-2">{project.name}</h3>
-                <p className="text-sm text-muted-foreground">{project.description}</p>
-              </motion.div>
-            ))}
-          </div>
-          <div className="text-center mt-8">
-            <Button variant="outline-glow" asChild>
-              <Link to="/projects">{t("home.viewAllProjects")}</Link>
-            </Button>
-          </div>
+      {/* Projects Section */}
+      <SectionWrapper padding="xl">
+        <SectionHeading 
+          title={t("home.projectsTitle")} 
+          subtitle={t("home.projectsSubtitle")} 
+        />
+        <div className="grid md:grid-cols-3 gap-6">
+          {projects.map((project, i) => (
+            <EventCard key={i} delay={i * 0.15}>
+              <span className="text-xs font-medium text-accent bg-accent/10 px-3 py-1 rounded-full">
+                {project.category}
+              </span>
+              <h3 className="text-xl font-semibold mt-4 mb-2 font-display">{project.name}</h3>
+              <p className="text-sm text-muted-foreground">{project.description}</p>
+            </EventCard>
+          ))}
         </div>
-      </section>
+        <div className="text-center mt-8">
+          <CustomButton variant="outline" asChild>
+            <Link to="/projects">{t("home.viewAllProjects")}</Link>
+          </CustomButton>
+        </div>
+      </SectionWrapper>
 
-      {/* Partners */}
-      <section className="py-16 border-t border-border">
-        <div className="container mx-auto px-4">
-          <SectionHeading title={t("home.partnersTitle")} />
-          <div className="flex flex-wrap justify-center gap-8 items-center">
-            {partners.map((partner, i) => (
-              <motion.div key={i} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.1 }} className="glass px-6 py-3 rounded-lg text-sm font-display font-medium text-muted-foreground">
-                {partner}
-              </motion.div>
-            ))}
-          </div>
+      {/* Partners Section */}
+      <SectionWrapper background="gray" padding="lg">
+        <SectionHeading 
+          title={t("home.partnersTitle")}
+        />
+        <div className="flex flex-wrap justify-center gap-8 items-center">
+          {partners.map((partner, i) => (
+            <motion.div 
+              key={i} 
+              {...fadeInUpVariants} 
+              transition={{ ...fadeInUpVariants.transition, delay: i * 0.1 }} 
+              className="px-6 py-3 rounded-lg bg-white border border-gray-100 text-sm font-display font-medium text-muted-foreground"
+            >
+              {partner}
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </SectionWrapper>
 
-      {/* Newsletter */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <motion.div {...fadeUp} className="max-w-xl mx-auto text-center">
-            <SectionHeading title={t("home.newsletterTitle")} subtitle={t("home.newsletterSubtitle")} />
-            <form className="flex gap-3 mt-6" onSubmit={handleSubscribe}>
-              <input
-                type="email"
-                required
-                value={newsletterEmail}
-                onChange={(e) => setNewsletterEmail(e.target.value)}
-                placeholder={t("home.emailPlaceholder")}
-                className="flex-1 px-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
-              />
-              <Button variant="glow" type="submit" disabled={subscribing}>
-                {subscribing ? "..." : t("home.subscribe")}
-              </Button>
-            </form>
-          </motion.div>
-        </div>
-      </section>
+      {/* Newsletter Section */}
+      <SectionWrapper padding="xl" background="accent">
+        <motion.div {...fadeInUpVariants} className="max-w-xl mx-auto text-center">
+          <SectionHeading 
+            title={t("home.newsletterTitle")} 
+            subtitle={t("home.newsletterSubtitle")} 
+          />
+          <form className="flex flex-col sm:flex-row gap-3 mt-6" onSubmit={handleSubscribe}>
+            <input
+              type="email"
+              required
+              value={newsletterEmail}
+              onChange={(e) => setNewsletterEmail(e.target.value)}
+              placeholder={t("home.emailPlaceholder")}
+              className="flex-1 px-4 py-3 rounded-lg bg-white border border-gray-200 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent"
+            />
+            <CustomButton type="submit" disabled={subscribing} loading={subscribing}>
+              {subscribing ? "..." : t("home.subscribe")}
+            </CustomButton>
+          </form>
+        </motion.div>
+      </SectionWrapper>
     </div>
   );
 };

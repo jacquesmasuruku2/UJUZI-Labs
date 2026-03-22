@@ -1,9 +1,9 @@
 {
-  "name": "goma-hub-web3",
+  "name": "ujiuzi-labs-web3",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "description": "GOMA HUB WEB3 - Plateforme d'innovation Web3 en RD Congo développée par Jacques MASURUKU",
+  "description": "UJUZI Labs - Plateforme d'innovation Web3 en RD Congo",
   "author": "Jacques MASURUKU <jacques.masuruku@domain.com>",
   "scripts": {
     "dev": "vite",
@@ -51,6 +51,7 @@
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.35.2",
+    "gsap": "^3.14.2",
     "i18next": "^25.8.17",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.462.0",

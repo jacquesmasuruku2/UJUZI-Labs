@@ -32,7 +32,7 @@ const Resources = () => {
       subtitle: "Blockchain and its opportunities for Africa",
       date: "30 July 2026",
       description:
-        "À Goma Hub Web3, nous avons rassemblé des builders, étudiants et entrepreneurs pour explorer l’écosystème Cardano et les opportunités concrètes du Web3 en Afrique. Entre échanges avec des experts, partages d’expériences et démonstrations, cette rencontre a surtout mis l’accent sur l’apprentissage, la collaboration et le passage à l’action autour de projets locaux.",
+        "À UJUZI Labs Web3, nous avons rassemblé des builders, étudiants et entrepreneurs pour explorer l’écosystème Cardano et les opportunités concrètes du Web3 en Afrique. Entre échanges avec des experts, partages d’expériences et démonstrations, cette rencontre a surtout mis l’accent sur l’apprentissage, la collaboration et le passage à l’action autour de projets locaux.",
       images: Array.from({ length: 6 }).map((_, i) => ({
         alt: `Wada Burkina Faso Hub — photo ${i + 1}`,
         imageUrl: `https://via.placeholder.com/900x650?text=Event+1+Photo+${i + 1}`,
@@ -43,7 +43,7 @@ const Resources = () => {
       subtitle: "Inauguration of Wada Burkina Faso Hub",
       date: "2026",
       description:
-        "Cette édition a mis en lumière la vision de Goma Hub Web3 : bâtir un centre d’excellence où les talents apprennent, expérimentent et développent des solutions blockchain utiles à notre région. Au programme : panels, networking, ateliers pratiques et mise en relation avec des mentors pour accélérer l’incubation des projets portés par la communauté.",
+        "Cette édition a mis en lumière la vision de UJUZI Labs Web3 : bâtir un centre d’excellence où les talents apprennent, expérimentent et développent des solutions blockchain utiles à notre région. Au programme : panels, networking, ateliers pratiques et mise en relation avec des mentors pour accélérer l’incubation des projets portés par la communauté.",
       images: Array.from({ length: 6 }).map((_, i) => ({
         alt: `Inauguration — photo ${i + 1}`,
         imageUrl: `https://via.placeholder.com/900x650?text=Event+2+Photo+${i + 1}`,
@@ -91,7 +91,7 @@ const Resources = () => {
               Galerie du Hub
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Découvrez quelques moments clés de Goma Hub Web3&nbsp;: événements, ateliers et temps forts avec la communauté.
+              Découvrez quelques moments clés de UJUZI Labs Web3&nbsp;: événements, ateliers et temps forts avec la communauté.
             </p>
           </div>
 
