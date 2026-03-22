@@ -11,12 +11,9 @@ const Projects = () => {
   const [active, setActive] = useState("All");
 
   const allProjects = [
-    { name: "KivuPay", category: "DeFi", tech: "Cardano, React", description: t("projects.proj1Desc"), team: "Team Alpha" },
-    { name: "EduChain", category: "Education", tech: "Ethereum, IPFS", description: t("projects.proj2Desc"), team: "Team Beta" },
-    { name: "VolcanoDAO", category: "Social Impact", tech: "Polygon, TheGraph", description: t("projects.proj3Desc"), team: "Team Gamma" },
-    { name: "KivuNet", category: "Infrastructure", tech: "Substrate, Rust", description: t("projects.proj4Desc"), team: "Team Delta" },
-    { name: "AgriBlock", category: "Social Impact", tech: "Cardano, Node.js", description: t("projects.proj5Desc"), team: "Team Epsilon" },
-    { name: "MedChain AI", category: "AI + Blockchain", tech: "Ethereum, Python", description: t("projects.proj6Desc"), team: "Team Zeta" },
+    { name: "Mtidano NFTree", category: "Environnement", tech: "Cardano, React", description: t("projects.proj1Desc"), team: "Team Alpha" },
+    { name: "Onboarding Program", category: "Education & Intégration", tech: "Cardano, IPFS", description: t("projects.proj2Desc"), team: "Team Beta" },
+    { name: "Genealogy", category: "Social Impact", tech: "Polygon, TheGraph", description: t("projects.proj3Desc"), team: "Team Gamma" },
   ];
 
   const categories = [

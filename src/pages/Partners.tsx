@@ -8,7 +8,6 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 const fadeUp = { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true }, transition: { duration: 0.6 } };
 
@@ -40,64 +39,128 @@ const Partners = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-10">Partners</h2>
-          <ScrollArea className="w-full overflow-x-auto">
-            <div className="flex gap-10 py-4 px-2 min-w-[700px]">
+          
+          {/* Partners Marquee */}
+          <div className="relative overflow-hidden bg-gradient-to-r from-transparent via-white/5 to-transparent py-8">
+            <div className="flex animate-scroll">
+              {/* premier set de partenaires */}
               {[
                 {
-                  name: "Partner 1",
+                  name: "Apex Fusion",
+                  logo: "/partners/apex.png",
+                  description: "Apex Fusion",
+                  url: "https://apexfusion.com/"
+                },
+                {
+                  name: "Wada",
+                  logo: "/partners/wada.jpg",
+                  description: "Organisation et d'un incubateur communautaire axé sur l'adoption de la blockchain Cardano et de l'intelligence artificielle en Afrique.",
+                  url: "https://wada.org/"
+                },
+                {
+                  name: "Catalyst",
+                  logo: "/partners/Catalyst.jpg",
+                  description: "Project Catalyst is the world’s largest decentralized innovation engine for solving real-world challenges.",
+                  url: "https://projectcatalyst.io/"
+                },
+                {
+                  name: "Ekival",
+                  logo: "/partners/Ekival.png",
+                  description: "Solution pour le global pair à pair transfert d'argent et de cryptomonnaies",
+                  url: "https://ekival.com/"
+                },
+                {
+                  name: "ISDR-GL",
                   logo: "/partners/partner1.png",
-                  description: "Virtual Assets Chamber - Crypto regulation & advocacy.",
-                  url: "https://virtualassets.example.com"
-                },
-                {
-                  name: "Partner 2",
-                  logo: "/partners/partner2.png",
-                  description: "Asaari - Blockchain solutions provider.",
-                  url: "https://asaari.example.com"
-                },
-                {
-                  name: "Partner 3",
-                  logo: "/partners/partner3.png",
-                  description: "Helicode - Web3 developer tools.",
-                  url: "https://helicode.example.com"
-                },
-                {
-                  name: "Partner 4",
-                  logo: "/partners/partner4.png",
-                  description: "Onchain Union - Decentralized finance.",
-                  url: "https://onchainunion.example.com"
-                },
-                {
-                  name: "Partner 5",
-                  logo: "/partners/partner5.png",
-                  description: "Farmhub Agro - AgriTech blockchain.",
-                  url: "https://farmhubagro.example.com"
-                },
-                {
-                  name: "Partner 6",
-                  logo: "/partners/partner6.png",
-                  description: "GATAC - Africa Trade Advisory Chamber.",
-                  url: "https://gatac.example.com"
+                  description: "ISDR-GL - Development Rural",
+                  url: "https://isdrgl.com"
                 }
               ].map((partner, i) => (
-                <div key={i} className="flex flex-col items-center min-w-[180px] max-w-[200px]">
+                <div key={`first-${i}`} className="flex flex-col items-center min-w-[200px] max-w-[220px] mx-4 flex-shrink-0">
                   <img
                     src={partner.logo}
                     alt={partner.name}
-                    className="h-20 w-auto object-contain mb-2"
-                    style={{ maxWidth: 180 }}
+                    className="h-16 w-auto object-contain mb-3"
+                    style={{ maxWidth: 160 }}
                   />
-                  <div className="text-center text-sm text-muted-foreground mb-1 min-h-[40px]">{partner.description}</div>
-                  <a href={partner.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline flex items-center gap-1">
+                  <div className="text-center text-sm text-muted-foreground mb-2 font-medium">{partner.description}</div>
+                  <a href={partner.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline flex items-center gap-1 text-xs">
                     <span>Visit website</span>
-                    <ExternalLink className="h-4 w-4" />
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                </div>
+              ))}
+              
+              {/* dupliquer les partenaires pour le scroll */}
+              {[
+                 {
+                  name: "Apex Fusion",
+                  logo: "/partners/partner2.png",
+                  description: "Apex Fusion",
+                  url: "https://apexfusion.com/"
+                },
+                {
+                  name: "Wada",
+                  logo: "/partners/wada.jpg",
+                  description: "Organisation et d'un incubateur communautaire axé sur l'adoption de la blockchain Cardano et de l'intelligence artificielle en Afrique.",
+                  url: "https://wada.org/"
+                },
+                {
+                  name: "Catalyst",
+                  logo: "/partners/Catalyst.jpg",
+                  description: "Project Catalyst is the world’s largest decentralized innovation engine for solving real-world challenges.",
+                  url: "https://projectcatalyst.io/"
+                },
+                {
+                  name: "Ekival",
+                  logo: "/partners/Ekival.png",
+                  description: "Solution pour le global pair à pair transfert d'argent et de cryptomonnaies",
+                  url: "https://ekival.com/"
+                },
+                {
+                  name: "ISDR-GL",
+                  logo: "/partners/partner1.png",
+                  description: "ISDR-GL - Development Rural",
+                  url: "https://isdrgl.com"
+                }
+              ].map((partner, i) => (
+                <div key={`second-${i}`} className="flex flex-col items-center min-w-[200px] max-w-[220px] mx-4 flex-shrink-0">
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="h-16 w-auto object-contain mb-3"
+                    style={{ maxWidth: 160 }}
+                  />
+                  <div className="text-center text-sm text-muted-foreground mb-2 font-medium">{partner.description}</div>
+                  <a href={partner.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline flex items-center gap-1 text-xs">
+                    <span>Visit website</span>
+                    <ExternalLink className="h-3 w-3" />
                   </a>
                 </div>
               ))}
             </div>
-          </ScrollArea>
+          </div>
         </div>
       </section>
+
+      <style jsx>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        
+        .animate-scroll {
+          animation: scroll 30s linear infinite;
+        }
+        
+        .animate-scroll:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
 
       <section className="py-20 bg-card/30">
         <div className="container mx-auto px-4">

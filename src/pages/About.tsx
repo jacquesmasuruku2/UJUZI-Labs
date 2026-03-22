@@ -14,25 +14,24 @@ const About = () => {
     {
       title: "Innovation Contextuelle",
       description: "Nous adaptons la technologie (Web3, IA, Agrotech) pour répondre aux défis spécifiques de notre communauté et de notre environnement.",
-      icon: "🌱",
+      icon: "",
       color: "#FF6B35"
     },
     {
       title: "Intégrité Technologique",
       description: "À travers nos opérations de validateurs (Cardano, Apex, Safro), nous prônons la transparence, la sécurité et la décentralisation comme gages de confiance.",
-      icon: "🔐",
       color: "#E74C3C"
     },
     {
       title: "Durabilité Régénératrice",
       description: "Qu'il s'agisse de lignes de code ou de semences maraîchères, chaque projet doit laisser une empreinte positive et durable sur l'environnement de la RDC.",
-      icon: "🌍",
+      icon: "",
       color: "#F39C12"
     },
     {
       title: "Empowerment Communautaire",
       description: "Le savoir ne vaut que s'il est partagé. Notre succès se mesure à la réussite des jeunes que nous formons et à la croissance des projets que nous incubons.",
-      icon: "🤝",
+      icon: "",
       color: "#FF6B35"
     }
   ];
@@ -41,61 +40,49 @@ const About = () => {
     {
       title: "Onboarding & Éducation Web3",
       description: "Initier et certifier au moins 500 jeunes par an aux technologies de la Blockchain et du Web3, en leur fournissant les compétences techniques nécessaires.",
-      icon: "🎓"
+      icon: ""
     },
     {
       title: "Innovation Environnementale",
       description: "Digitaliser la reforestation à travers le projet Mtidano, en utilisant les NFTs pour tracer, financer et garantir la survie d'arbres plantés.",
-      icon: "🌳"
+      icon: ""
     },
     {
       title: "Pionnier du Développement Durable",
       description: "Développer des fermes pilotes utilisant des méthodes d'agriculture durable et maraîchère pour accroître la production locale.",
-      icon: "🚜"
+      icon: ""
     },
     {
       title: "Infrastructure & Décentralisation",
       description: "Opérer des nœuds validateurs robustes sur les réseaux Cardano, Apex Fusion et Safrochain pour la gouvernance blockchain.",
-      icon: "⚡"
+      icon: ""
     }
   ];
 
   const team = [
     { 
-      name: "Jacques Masuruku", 
-      role: "Founder & CEO", 
-      bio: "Visionnaire blockchain avec 5+ ans d'expérience en Web3 et développement durable. Passionné par l'innovation technologique au service de l'Afrique.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face"
+      name: "BANDU BALUME Boaz", 
+      role: "Team Leader", 
+      bio: "Leader visionnaire avec une expertise en gestion d'équipe et coordination de projets. Guide l'équipe vers l'excellence et l'innovation.",
+      image: ""
     },
     { 
-      name: "Sarah Mutesa", 
-      role: "Head of Education", 
-      bio: "Éducatrice passionnée par l'accessibilité blockchain pour tous les publics. Spécialiste en pédagogie numérique et inclusion technologique.",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face"
+      name: "Martin MUSAGARA", 
+      role: "DRep Pionner", 
+      bio: "Pionnier dans la représentation décentralisée (DRep Cardano) avec une passion pour la gouvernance blockchain et l'autonomie numérique.",
+      image: ""
     },
     { 
-      name: "Jean-Pierre Bakole", 
-      role: "Community Lead", 
-      bio: "Créateur de ponts entre communautés locales et écosystèmes Web3 globaux. Expert en engagement communautaire et développement de réseaux.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face"
+      name: "Jacques MASURUKU", 
+      role: "Secrétaire Rapporteur et Apprenant Dev. Junior", 
+      bio: "Développeur junior passionné par le Web3, assurant le suivi des projets et la documentation tout en développant ses compétences techniques.",
+      image: ""
     },
     { 
-      name: "Grace Lukoo", 
-      role: "Tech Lead", 
-      bio: "Développeuse full-stack spécialisée en smart contracts et solutions décentralisées. Passionnée par la blockchain et l'innovation sociale.",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face"
-    },
-    { 
-      name: "Michel Kavota", 
-      role: "Operations Manager", 
-      bio: "Expert en gestion de projets et opérations. Veille à l'excellence opérationnelle et à l'efficacité des processus internes.",
-      image: "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=300&h=300&fit=crop&crop=face"
-    },
-    { 
-      name: "Aline Mbayo", 
-      role: "Marketing Lead", 
-      bio: "Stratège en marketing digital et communication. Spécialisée dans la promotion de technologies innovantes et l'engagement des parties prenantes.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face"
+      name: "Olivier MWATSI", 
+      role: "Dev Apprenant", 
+      bio: "Développeur en apprentissage, dédié à l'acquisition de nouvelles compétences en développement Web3 et blockchain.",
+      image: ""
     }
   ];
 
@@ -303,11 +290,17 @@ const About = () => {
                 className="team-card"
               >
                 <div className="team-avatar">
-                  <img 
-                    src={member.image} 
-                    alt={member.name}
-                    loading="lazy"
-                  />
+                  {member.image ? (
+                    <img 
+                      src={member.image} 
+                      alt={member.name}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="team-avatar-placeholder">
+                      <Users className="w-8 h-8" style={{ color: 'var(--accent-orange)' }} />
+                    </div>
+                  )}
                 </div>
                 <h3 className="team-name">{member.name}</h3>
                 <p className="team-role">{member.role}</p>
