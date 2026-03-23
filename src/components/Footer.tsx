@@ -93,7 +93,7 @@ const Footer = () => {
                   <Mail className="h-4 w-4" />
                   contact@ujiuzilabs.com
                 </a>
-                <a href="tel:+243123456789" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+                <a href="tel:+243974973061" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
                   <Phone className="h-4 w-4" />
                   +243974973061
                 </a>
