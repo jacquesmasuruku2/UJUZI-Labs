@@ -13,7 +13,10 @@
     "documentation": "Documentation",
     "tools": "Outils",
     "gallery": "Gallery",
-    "network": "Réseau",
+    "onboarding": "Onboarding Program",
+    "onboardingWhat": "C'est quoi Onboarding program?",
+    "impact": "Impact",
+    "donate": "Donate",
     "partners": "Partenaires",
     "validators": "Validateurs",
     "contact": "Contact"
@@ -175,6 +178,16 @@
     "r8Desc": "Pratiques de sécurité essentielles pour le développement de smart contracts.",
     "r9Title": "Guide de Tokenomics",
     "r9Desc": "Comprendre l'économie et la conception des tokens."
+  },
+  "onboarding": {
+    "title": "Onboarding Program",
+    "subtitle": "Accompagner les nouveaux membres dans l'écosystème UJUZI Labs.",
+    "whatTitle": "C'est quoi Onboarding program?",
+    "whatDesc": "L'Onboarding Program est un parcours d'accueil structuré pour aider les nouveaux membres à comprendre l'écosystème, les outils et les opportunités au sein d'UJUZI Labs.",
+    "impactTitle": "Impact",
+    "impactDesc": "Ce programme améliore la rétention des membres, accélère l'apprentissage pratique et augmente le nombre de participants qui passent à l'action sur des projets concrets.",
+    "donateTitle": "Donate",
+    "donateDesc": "Vos contributions nous permettent de financer les sessions d'introduction, les supports pédagogiques et l'accompagnement des nouveaux participants."
   },
   "blog": {
     "title": "Blog & Actualités",
