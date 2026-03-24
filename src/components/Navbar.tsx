@@ -26,7 +26,10 @@ const Navbar = () => {
       label: "nav.about",
       items: [
         { key: "presentation", path: "/about" },
+        { key: "services", path: "/about#services" },
         { key: "team", path: "/about#team" },
+        { key: "partners", path: "/partners" },
+        { key: "contact", path: "/contact" },
       ],
     },
     {
@@ -34,6 +37,8 @@ const Navbar = () => {
       items: [
         { key: "projects", path: "/projects" },
         { key: "events", path: "/events" },
+        { key: "validators", path: "/validators" },
+        { key: "community", path: "/community" },
       ],
     },
     {
@@ -46,14 +51,13 @@ const Navbar = () => {
       ],
     },
     {
-      label: "nav.network",
+      label: "nav.onboarding",
       items: [
-        { key: "community", path: "/community" },
-        { key: "partners", path: "/partners" },
-        { key: "validators", path: "/validators" },
+        { key: "onboardingWhat", path: "/onboarding#what-is-onboarding" },
+        { key: "impact", path: "/onboarding#impact" },
+        { key: "donate", path: "/onboarding#donate" },
       ],
     },
-    { key: "contact", path: "/contact" },
   ];
 
   const isGroup = (item: any): item is NavGroup => "items" in item;
@@ -102,7 +106,7 @@ const Navbar = () => {
                   onMouseLeave={handleMouseLeave}
                 >
                   <button
-                    className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors flex items-center gap-2 ${
+                    className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors flex items-center gap-2 whitespace-nowrap ${
                       isGroupActive(item) ? "text-primary bg-primary/10" : "text-muted-foreground hover:text-foreground hover:bg-accent"
                     }`}
                   >
@@ -115,7 +119,7 @@ const Navbar = () => {
                         <Link
                           key={sub.path}
                           to={sub.path}
-                          className={`block px-4 py-3 text-sm transition-colors ${
+                          className={`block px-4 py-3 text-sm transition-colors whitespace-nowrap ${
                             isActive(sub.path) ? "text-primary bg-primary/10" : "text-muted-foreground hover:text-foreground hover:bg-accent"
                           }`}
                         >
@@ -129,7 +133,7 @@ const Navbar = () => {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                  className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap ${
                     isActive(item.path) ? "text-primary bg-primary/10" : "text-muted-foreground hover:text-foreground hover:bg-accent"
                   }`}
                 >
