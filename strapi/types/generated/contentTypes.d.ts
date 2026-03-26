@@ -430,6 +430,52 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiDonationDonation extends Struct.CollectionTypeSchema {
+  collectionName: 'donations';
+  info: {
+    description: 'Donation records for Mobile Money and Crypto';
+    displayName: 'Donation';
+    pluralName: 'donations';
+    singularName: 'donation';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    amount: Schema.Attribute.Decimal;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    currency: Schema.Attribute.String;
+    donor_email: Schema.Attribute.Email;
+    donor_name: Schema.Attribute.String;
+    donor_phone: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::donation.donation'
+    > &
+      Schema.Attribute.Private;
+    method: Schema.Attribute.Enumeration<['mobile_money', 'crypto']>;
+    network: Schema.Attribute.String;
+    note: Schema.Attribute.Text;
+    provider: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    raw_payload: Schema.Attribute.JSON;
+    status: Schema.Attribute.Enumeration<
+      ['pending', 'confirmed', 'failed', 'manual_review']
+    > &
+      Schema.Attribute.DefaultTo<'pending'>;
+    transaction_id: Schema.Attribute.String;
+    tx_hash: Schema.Attribute.String;
+    tx_ref: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    wallet_address: Schema.Attribute.Text;
+  };
+}
+
 export interface ApiMenutestMenutest extends Struct.CollectionTypeSchema {
   collectionName: 'menutests';
   info: {
@@ -1040,6 +1086,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::donation.donation': ApiDonationDonation;
       'api::menutest.menutest': ApiMenutestMenutest;
       'api::site-menu-group.site-menu-group': ApiSiteMenuGroupSiteMenuGroup;
       'api::site-menu-item.site-menu-item': ApiSiteMenuItemSiteMenuItem;
