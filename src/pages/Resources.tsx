@@ -228,7 +228,7 @@ const Resources = () => {
                 key={`${event.title}-${eventIndex}`}
                 {...fadeUp}
                 transition={{ ...fadeUp.transition, delay: eventIndex * 0.1 }}
-                className="glass rounded-xl p-6 md:p-8"
+                className="glass rounded-none p-6 md:p-8"
               >
                 <div className="text-center max-w-3xl mx-auto">
                   <h3 className="font-display text-2xl md:text-3xl font-bold">
@@ -249,7 +249,7 @@ const Resources = () => {
                   {event.images.map((img, imgIndex) => (
                     <div
                       key={`${eventIndex}-${imgIndex}`}
-                      className="glass rounded-lg overflow-hidden hover:border-primary/30 transition-colors"
+                      className="glass rounded-none overflow-hidden hover:border-primary/30 transition-colors"
                     >
                       <div className="relative aspect-[4/3] overflow-hidden">
                         <img

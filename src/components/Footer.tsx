@@ -291,9 +291,9 @@ const Footer = () => {
         </div>
 
         <div className="mt-16 pt-8 border-t border-border">
-          <p className="text-sm text-muted-foreground flex items-center justify-between gap-4">
-            <span className="text-left">© {new Date().getFullYear()} UJUZI Labs. {t("footer.rights")}</span>
-            <span className="whitespace-nowrap">
+          <p className="text-sm text-muted-foreground flex flex-col items-center gap-2 text-center sm:flex-row sm:justify-between sm:items-center sm:text-left">
+            <span className="w-full sm:w-auto">© {new Date().getFullYear()} UJUZI Labs. {t("footer.rights")}</span>
+            <span className="w-full sm:w-auto sm:text-right">
               Developped by{" "}
               <a
                 href={devMailto}
