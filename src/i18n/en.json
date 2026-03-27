@@ -20,7 +20,14 @@
     "donate": "Donate",
     "partners": "Partners",
     "validators": "Validators",
-    "contact": "Contact"
+    "contact": "Contact",
+    "projectOnboarding": "Onboarding Program",
+    "projectGenealogy": "Genealogy",
+    "projectMtidano": "Mtidano",
+    "projectWenze": "Wenze",
+    "projectGomaHackathon": "Goma Hackathon",
+    "projectShririki": "Shririki DRC",
+    "projectUmoja": "Umoja Fund"
   },
   "hero": {
     "badge": "Web3 Innovation Hub — Central Africa",

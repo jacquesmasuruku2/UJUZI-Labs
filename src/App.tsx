@@ -22,6 +22,7 @@ import Validators from "./pages/Validators";
 import Documentation from "./pages/Documentation";
 import Tools from "./pages/Tools";
 import OnboardingProgram from "./pages/OnboardingProgram";
+import MtidanoProject from "./pages/MtidanoProject";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
@@ -66,6 +67,7 @@ const App = () => (
               <Route path="/documentation" element={<Documentation />} />
               <Route path="/tools" element={<Tools />} />
               <Route path="/onboarding" element={<OnboardingProgram />} />
+              <Route path="/projects/mtidano" element={<MtidanoProject />} />
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route
                 path="/admin"

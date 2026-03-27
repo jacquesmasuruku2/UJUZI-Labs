@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { strapiFetch } from "@/lib/strapi";
 
 const fadeUp = { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true }, transition: { duration: 0.6 } };
@@ -17,12 +18,73 @@ const Projects = () => {
     description: string;
     tech?: string;
     team?: string;
+    path?: string;
   };
 
   const hardcodedProjects: ProjectCard[] = [
-    { name: "Mtidano NFTree", category: "Environnement", tech: "Cardano, React", description: t("projects.proj1Desc"), team: "Team Alpha" },
-    { name: "Onboarding Program", category: "Education & Intégration", tech: "Cardano, IPFS", description: t("projects.proj2Desc"), team: "Team Beta" },
-    { name: "Genealogy", category: "Social Impact", tech: "Polygon, TheGraph", description: t("projects.proj3Desc"), team: "Team Gamma" },
+    {
+      name: "Onboarding Program",
+      category: "Education",
+      tech: "Web3, Cardano",
+      description:
+        "Programme d'intégration Web3 de UJUZI Labs avec sessions pratiques, accompagnement et impact communautaire.",
+      team: "UJUZI Labs",
+      path: "/onboarding",
+    },
+    {
+      name: "Genealogy",
+      category: "Social Impact",
+      tech: "React, Data",
+      description:
+        "Projet orienté gestion des liens familiaux et de la mémoire communautaire via des outils numériques accessibles.",
+      team: "UJUZI Labs",
+      path: "/projects#genealogy",
+    },
+    {
+      name: "Mtidano",
+      category: "Environnement",
+      tech: "Cardano, NFT",
+      description:
+        "Solution orientée reforestation et traçabilité d'impact avec un modèle digital durable pour les communautés.",
+      team: "UJUZI Labs",
+      path: "/projects/mtidano",
+    },
+    {
+      name: "Wenze",
+      category: "Infrastructure",
+      tech: "Marketplace, Web",
+      description:
+        "Plateforme digitale orientée marché local pour faciliter les échanges de biens et services de façon moderne.",
+      team: "UJUZI Labs",
+      path: "/projects#wenze",
+    },
+    {
+      name: "Goma Hackathon",
+      category: "Education",
+      tech: "Innovation, Community",
+      description:
+        "Série d'événements de co-création pour faire émerger des solutions technologiques concrètes à Goma.",
+      team: "UJUZI Labs",
+      path: "/projects#goma-hackathon",
+    },
+    {
+      name: "Shririki DRC",
+      category: "Social Impact",
+      tech: "Community Platform",
+      description:
+        "Initiative collaborative pour renforcer la cohésion sociale, les talents locaux et les opportunités d'impact.",
+      team: "UJUZI Labs",
+      path: "/projects#shririki-drc",
+    },
+    {
+      name: "Umoja Fund",
+      category: "Infrastructure",
+      tech: "Financement, Community",
+      description:
+        "Mécanisme communautaire de financement pour soutenir les projets à fort impact social et économique.",
+      team: "UJUZI Labs",
+      path: "/projects#umoja-fund",
+    },
   ];
 
   const [allProjects, setAllProjects] = useState<ProjectCard[]>(hardcodedProjects);
@@ -109,7 +171,17 @@ const Projects = () => {
                     </p>
                   ) : null}
                 </div>
-                <Button variant="link" className="p-0 h-auto text-primary">{t("projects.viewProject")} <ExternalLink className="ml-1 h-3 w-3" /></Button>
+                {project.path ? (
+                  <Link to={project.path}>
+                    <Button variant="link" className="p-0 h-auto text-primary">
+                      Ouvrir le projet <ExternalLink className="ml-1 h-3 w-3" />
+                    </Button>
+                  </Link>
+                ) : (
+                  <Button variant="link" className="p-0 h-auto text-primary">
+                    {t("projects.viewProject")} <ExternalLink className="ml-1 h-3 w-3" />
+                  </Button>
+                )}
               </motion.div>
             ))}
           </div>

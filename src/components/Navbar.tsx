@@ -34,9 +34,20 @@ const Navbar = () => {
       ],
     },
     {
+      label: "nav.projects",
+      items: [
+        { key: "projectOnboarding", path: "/onboarding" },
+        { key: "projectGenealogy", path: "/projects#genealogy" },
+        { key: "projectMtidano", path: "/projects/mtidano" },
+        { key: "projectWenze", path: "/projects#wenze" },
+        { key: "projectGomaHackathon", path: "/projects#goma-hackathon" },
+        { key: "projectShririki", path: "/projects#shririki-drc" },
+        { key: "projectUmoja", path: "/projects#umoja-fund" },
+      ],
+    },
+    {
       label: "nav.ecosystem",
       items: [
-        { key: "projects", path: "/projects" },
         { key: "events", path: "/events" },
         { key: "validators", path: "/validators" },
         { key: "community", path: "/community" },
@@ -51,17 +62,41 @@ const Navbar = () => {
         { key: "gallery", path: "/resources#gallery" },
       ],
     },
-    {
-      label: "nav.onboarding",
-      items: [
-        { key: "onboardingWhat", path: "/onboarding#what-is-onboarding" },
-        { key: "impact", path: "/onboarding#impact" },
-        { key: "donate", path: "/onboarding#donate" },
-      ],
-    },
   ];
 
   const [navGroups, setNavGroups] = useState<(NavGroup | { key: string; path: string })[]>(fallbackNavGroups);
+
+  const orderNavbarItems = (items: (NavGroup | { key: string; path: string })[]) => {
+    const home = items.find((it) => !("items" in it) && it.path === "/") as { key: string; path: string } | undefined;
+    const about = items.find((it) => "items" in it && it.label === "nav.about") as NavGroup | undefined;
+    const projectsGroup =
+      (items.find((it) => "items" in it && it.label === "nav.projects") as NavGroup | undefined) ??
+      {
+        label: "nav.projects",
+        items: [
+          { key: "projectOnboarding", path: "/onboarding" },
+          { key: "projectGenealogy", path: "/projects#genealogy" },
+          { key: "projectMtidano", path: "/projects/mtidano" },
+          { key: "projectWenze", path: "/projects#wenze" },
+          { key: "projectGomaHackathon", path: "/projects#goma-hackathon" },
+          { key: "projectShririki", path: "/projects#shririki-drc" },
+          { key: "projectUmoja", path: "/projects#umoja-fund" },
+        ],
+      };
+
+    const remaining = items.filter((it) => {
+      if (!("items" in it) && it.path === "/") return false;
+      if ("items" in it && (it.label === "nav.about" || it.label === "nav.projects")) return false;
+      return true;
+    });
+
+    const ordered: (NavGroup | { key: string; path: string })[] = [];
+    if (home) ordered.push(home);
+    if (about) ordered.push(about);
+    ordered.push(projectsGroup);
+    ordered.push(...remaining);
+    return ordered;
+  };
 
   const stripNavKey = (labelKey: string) => {
     if (!labelKey) return labelKey;
@@ -93,6 +128,7 @@ const Navbar = () => {
             if (attrs.location !== "header") return null;
             const groupLabelKey = String(attrs.labelKey ?? "");
             if (!groupLabelKey) return null;
+            if (groupLabelKey === "nav.onboarding") return null;
 
             const items = attrs.items?.data ?? [];
             const mappedItems = items
@@ -118,10 +154,11 @@ const Navbar = () => {
           .sort((a, b) => a.order - b.order);
 
         if (headerGroups.length) {
-          setNavGroups([
+          const mapped = [
             { key: "home", path: "/" },
             ...headerGroups.map((g) => ({ label: g.label, items: g.items })),
-          ]);
+          ];
+          setNavGroups(orderNavbarItems(mapped));
         }
       } catch {
         // Fallback déjà présent
