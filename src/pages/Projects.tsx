@@ -26,8 +26,7 @@ const Projects = () => {
       name: "Onboarding Program",
       category: "Education",
       tech: "Web3, Cardano",
-      description:
-        "Programme d'intégration Web3 de UJUZI Labs avec sessions pratiques, accompagnement et impact communautaire.",
+      description: t("projects.custom.onboardingDesc"),
       team: "UJUZI Labs",
       path: "/onboarding",
     },
@@ -35,8 +34,7 @@ const Projects = () => {
       name: "Genealogy",
       category: "Social Impact",
       tech: "React, Data",
-      description:
-        "Projet orienté gestion des liens familiaux et de la mémoire communautaire via des outils numériques accessibles.",
+      description: t("projects.custom.genealogyDesc"),
       team: "UJUZI Labs",
       path: "/projects#genealogy",
     },
@@ -44,8 +42,7 @@ const Projects = () => {
       name: "Mtidano",
       category: "Environnement",
       tech: "Cardano, NFT",
-      description:
-        "Solution orientée reforestation et traçabilité d'impact avec un modèle digital durable pour les communautés.",
+      description: t("projects.custom.mtidanoDesc"),
       team: "UJUZI Labs",
       path: "/projects/mtidano",
     },
@@ -53,8 +50,7 @@ const Projects = () => {
       name: "Wenze",
       category: "Infrastructure",
       tech: "Marketplace, Web",
-      description:
-        "Plateforme digitale orientée marché local pour faciliter les échanges de biens et services de façon moderne.",
+      description: t("projects.custom.wenzeDesc"),
       team: "UJUZI Labs",
       path: "/projects#wenze",
     },
@@ -62,8 +58,7 @@ const Projects = () => {
       name: "Goma Hackathon",
       category: "Education",
       tech: "Innovation, Community",
-      description:
-        "Série d'événements de co-création pour faire émerger des solutions technologiques concrètes à Goma.",
+      description: t("projects.custom.gomaHackathonDesc"),
       team: "UJUZI Labs",
       path: "/projects#goma-hackathon",
     },
@@ -71,8 +66,7 @@ const Projects = () => {
       name: "Shririki DRC",
       category: "Social Impact",
       tech: "Community Platform",
-      description:
-        "Initiative collaborative pour renforcer la cohésion sociale, les talents locaux et les opportunités d'impact.",
+      description: t("projects.custom.shririkiDesc"),
       team: "UJUZI Labs",
       path: "/projects#shririki-drc",
     },
@@ -80,8 +74,7 @@ const Projects = () => {
       name: "Umoja Fund",
       category: "Infrastructure",
       tech: "Financement, Community",
-      description:
-        "Mécanisme communautaire de financement pour soutenir les projets à fort impact social et économique.",
+      description: t("projects.custom.umojaDesc"),
       team: "UJUZI Labs",
       path: "/projects#umoja-fund",
     },
@@ -174,7 +167,7 @@ const Projects = () => {
                 {project.path ? (
                   <Link to={project.path}>
                     <Button variant="link" className="p-0 h-auto text-primary">
-                      Ouvrir le projet <ExternalLink className="ml-1 h-3 w-3" />
+                      {t("projects.openProject")} <ExternalLink className="ml-1 h-3 w-3" />
                     </Button>
                   </Link>
                 ) : (

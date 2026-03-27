@@ -40,7 +40,7 @@ const OnboardingProgram = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [missingImages, setMissingImages] = useState<number[]>([]);
   const [donateMethod, setDonateMethod] = useState<"mobile" | "crypto" | null>(null);
-  const [mobileNetwork, setMobileNetwork] = useState<"orange" | "airtel" | "mpesa">("orange");
+  const [paymentChannel, setPaymentChannel] = useState<"orange" | "airtel" | "mpesa" | "visa" | "mastercard">("orange");
   const [donorName, setDonorName] = useState("");
   const [donorEmail, setDonorEmail] = useState("");
   const [donorPhone, setDonorPhone] = useState("");
@@ -58,17 +58,17 @@ const OnboardingProgram = () => {
     setDonateSuccess("");
     const amount = Number(donationAmount);
     if (!donorName.trim() || !donorEmail.trim() || !donorPhone.trim()) {
-      setDonateError("Veuillez renseigner nom, email et téléphone.");
+      setDonateError(t("onboarding.donateForm.errors.requiredFields"));
       return;
     }
     if (!Number.isFinite(amount) || amount <= 0) {
-      setDonateError("Veuillez saisir un montant valide.");
+      setDonateError(t("onboarding.donateForm.errors.invalidAmount"));
       return;
     }
 
     const flwPubKey = import.meta.env.VITE_FLUTTERWAVE_PUBLIC_KEY as string | undefined;
     if (!flwPubKey) {
-      setDonateError("Clé Flutterwave manquante (VITE_FLUTTERWAVE_PUBLIC_KEY).");
+      setDonateError(t("onboarding.donateForm.errors.missingFlutterwaveKey"));
       return;
     }
 
@@ -81,12 +81,14 @@ const OnboardingProgram = () => {
     }
 
     const txRef = `ujuzi-donate-${Date.now()}`;
+    const paymentOptions = paymentChannel === "visa" || paymentChannel === "mastercard" ? "card" : "mobilemoney";
+
     checkout({
       public_key: flwPubKey,
       tx_ref: txRef,
       amount,
       currency: "USD",
-      payment_options: "mobilemoney",
+      payment_options: paymentOptions,
       customer: {
         email: donorEmail.trim(),
         phonenumber: donorPhone.trim(),
@@ -94,18 +96,18 @@ const OnboardingProgram = () => {
       },
       customizations: {
         title: "UJUZI Labs Donation",
-        description: `Donation via ${mobileNetwork.toUpperCase()}`,
+        description: `Donation via ${paymentChannel.toUpperCase()}`,
         logo: `${window.location.origin}/favicon.ico`,
       },
       meta: {
-        mobile_network: mobileNetwork,
+        payment_channel: paymentChannel,
         donation_context: "onboarding_program",
       },
       callback: async (response: unknown) => {
         try {
           const r = (response ?? {}) as { transaction_id?: string | number; tx_ref?: string };
           if (!r.transaction_id && !r.tx_ref) {
-            setDonateError("Réponse Flutterwave incomplète. Vérification impossible.");
+            setDonateError(t("onboarding.donateForm.errors.incompleteFlutterwaveResponse"));
             return;
           }
           setIsSubmittingDonation(true);
@@ -122,15 +124,15 @@ const OnboardingProgram = () => {
             }),
           });
           if (verify.ok && verify.status === "confirmed") {
-            setDonateSuccess("Paiement confirmé. Merci pour votre contribution.");
+            setDonateSuccess(t("onboarding.donateForm.success.paymentConfirmed"));
             setDonateError("");
           } else if (verify.ok) {
-            setDonateSuccess("Paiement reçu et en cours de validation.");
+            setDonateSuccess(t("onboarding.donateForm.success.paymentPending"));
           } else {
-            setDonateError("Paiement initié, mais la vérification a échoué.");
+            setDonateError(t("onboarding.donateForm.errors.verifyFailed"));
           }
         } catch {
-          setDonateError("Paiement initié, mais erreur lors de la vérification serveur.");
+          setDonateError(t("onboarding.donateForm.errors.serverVerifyFailed"));
         } finally {
           setIsSubmittingDonation(false);
         }
@@ -146,7 +148,7 @@ const OnboardingProgram = () => {
       await navigator.clipboard.writeText(cardanoWalletAddress);
       setDonateError("");
     } catch {
-      setDonateError("Copie impossible automatiquement. Veuillez copier l'adresse manuellement.");
+      setDonateError(t("onboarding.donateForm.errors.copyFailed"));
     }
   };
 
@@ -170,12 +172,12 @@ const OnboardingProgram = () => {
       });
       if (res.ok) {
         setCryptoConfirmed(true);
-        setDonateSuccess("Merci. Votre don crypto a été enregistré pour vérification manuelle.");
+        setDonateSuccess(t("onboarding.donateForm.success.cryptoRecorded"));
       } else {
-        setDonateError("Impossible d'enregistrer votre don crypto pour le moment.");
+        setDonateError(t("onboarding.donateForm.errors.cryptoRecordFailed"));
       }
     } catch {
-      setDonateError("Erreur serveur lors de l'enregistrement du don crypto.");
+      setDonateError(t("onboarding.donateForm.errors.cryptoServerError"));
     } finally {
       setIsSubmittingDonation(false);
     }
@@ -300,16 +302,11 @@ const OnboardingProgram = () => {
                 {/* Texte (droite) */}
                 <div className="flex items-center justify-end p-5 md:p-6 lg:p-4">
                   <div className="max-w-md py-1 px-1 md:py-2 md:px-2">
-                    <h3 className="font-display text-xl md:text-2xl font-bold mb-3 text-left text-foreground">
-                      Web3 Onboarding Program
-                    </h3>
+                    <h3 className="font-display text-xl md:text-2xl font-bold mb-3 text-left text-foreground">{t("onboarding.storyTitle")}</h3>
                     <p
                       className="font-display leading-relaxed text-justify text-sm md:text-base lg:text-lg font-medium text-foreground"
                     >
-                      Since 2023, Ujuzi Labs identified a strong need for Web3 education, especially around the Cardano blockchain.
-                      This led us to launch this program, through which at the end of each month we mobilize our limited resources and
-                      recruit young entrepreneurs, students, and technology enthusiasts to provide a one-week training on topics such as Web3,
-                      distributed ledger technology, blockchain, Cardano wallets, and other practical foundations for their journey.
+                      {t("onboarding.storyText")}
                     </p>
                   </div>
                 </div>
@@ -446,24 +443,28 @@ const OnboardingProgram = () => {
                   <Smartphone className="h-5 w-5 text-primary" />
                   <h3 className="font-display text-lg font-semibold text-foreground">{t("onboarding.mobileNetworksTitle")}</h3>
                 </div>
-                <p className="text-sm text-foreground/80 mb-5">
-                  Remplissez les informations ci-dessous pour finaliser votre don via Mobile Money.
-                </p>
+                <p className="text-sm text-foreground/80 mb-5">{t("onboarding.donateForm.mobileHelp")}</p>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="text-sm text-foreground/90 block mb-1.5">Réseau Mobile Money</label>
+                    <label className="text-sm text-foreground/90 block mb-1.5">{t("onboarding.donateForm.availableMethods")}</label>
                     <select
-                      value={mobileNetwork}
-                      onChange={(e) => setMobileNetwork(e.target.value as "orange" | "airtel" | "mpesa")}
+                      value={paymentChannel}
+                      onChange={(e) =>
+                        setPaymentChannel(
+                          e.target.value as "orange" | "airtel" | "mpesa" | "visa" | "mastercard"
+                        )
+                      }
                       className="w-full px-4 py-3 rounded-lg bg-background/80 border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all duration-200"
                     >
                       <option value="orange">{t("onboarding.mobile.orange")}</option>
                       <option value="airtel">{t("onboarding.mobile.airtel")}</option>
                       <option value="mpesa">{t("onboarding.mobile.mpesa")}</option>
+                      <option value="visa">Carte Visa</option>
+                      <option value="mastercard">MasterCard</option>
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm text-foreground/90 block mb-1.5">Montant (USD)</label>
+                    <label className="text-sm text-foreground/90 block mb-1.5">{t("onboarding.donateForm.amountUsd")}</label>
                     <input
                       type="number"
                       min="1"
@@ -475,7 +476,7 @@ const OnboardingProgram = () => {
                     />
                   </div>
                   <div>
-                    <label className="text-sm text-foreground/90 block mb-1.5">Nom complet</label>
+                    <label className="text-sm text-foreground/90 block mb-1.5">{t("onboarding.donateForm.fullName")}</label>
                     <input
                       type="text"
                       value={donorName}
@@ -495,7 +496,7 @@ const OnboardingProgram = () => {
                     />
                   </div>
                   <div className="md:col-span-2">
-                    <label className="text-sm text-foreground/90 block mb-1.5">Téléphone</label>
+                    <label className="text-sm text-foreground/90 block mb-1.5">{t("onboarding.donateForm.phone")}</label>
                     <input
                       type="tel"
                       value={donorPhone}
@@ -512,7 +513,7 @@ const OnboardingProgram = () => {
                     className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.02] transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
                     disabled={isSubmittingDonation}
                   >
-                    {isSubmittingDonation ? "Traitement..." : "Continuer le don via Flutterwave"}
+                    {isSubmittingDonation ? t("onboarding.donateForm.processing") : t("onboarding.donateForm.continueFlutterwave")}
                   </button>
                 </div>
               </motion.div>
@@ -533,7 +534,7 @@ const OnboardingProgram = () => {
                   {t("onboarding.cryptoHow")}
                 </p>
                 <div className="rounded-lg border border-border bg-background/80 p-4 mb-4">
-                  <p className="text-xs text-foreground/70 mb-1">Adresse wallet Cardano</p>
+                  <p className="text-xs text-foreground/70 mb-1">{t("onboarding.donateForm.walletAddress")}</p>
                   <p className="text-sm text-foreground break-all">{cardanoWalletAddress}</p>
                 </div>
                 <div className="flex flex-wrap gap-3 mb-4">
@@ -542,7 +543,7 @@ const OnboardingProgram = () => {
                     onClick={copyWalletAddress}
                     className="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-border bg-background/80 text-foreground hover:bg-secondary/70 transition-all duration-200"
                   >
-                    Copier l'adresse
+                    {t("onboarding.donateForm.copyAddress")}
                   </button>
                   <a
                     href={`https://cardanoscan.io/address/${cardanoWalletAddress}`}
@@ -550,7 +551,7 @@ const OnboardingProgram = () => {
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-border bg-background/80 text-foreground hover:bg-secondary/70 transition-all duration-200"
                   >
-                    Voir sur Cardanoscan
+                    {t("onboarding.donateForm.viewOnCardanoscan")}
                   </a>
                 </div>
                 <button
@@ -559,11 +560,11 @@ const OnboardingProgram = () => {
                   className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 hover:scale-[1.02] transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
                   disabled={isSubmittingDonation}
                 >
-                  {isSubmittingDonation ? "Traitement..." : "J'ai effectué le don"}
+                  {isSubmittingDonation ? t("onboarding.donateForm.processing") : t("onboarding.donateForm.iHaveDonated")}
                 </button>
                 {cryptoConfirmed && (
                   <p className="text-sm text-primary mt-3">
-                    Merci pour votre contribution. Notre équipe vérifiera la transaction on-chain.
+                    {t("onboarding.donateForm.success.cryptoThanks")}
                   </p>
                 )}
               </motion.div>

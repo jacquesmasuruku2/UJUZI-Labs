@@ -131,6 +131,16 @@
     "subtitle": "Innovative Web3 solutions built and incubated by UJUZI Labs.",
     "all": "All",
     "viewProject": "View Project",
+    "openProject": "Open project",
+    "custom": {
+      "onboardingDesc": "UJUZI Labs Web3 onboarding program with practical sessions, mentorship, and community impact.",
+      "genealogyDesc": "Project focused on managing family links and community memory through accessible digital tools.",
+      "mtidanoDesc": "Reforestation and impact-tracking solution with a sustainable digital model for communities.",
+      "wenzeDesc": "Local-market digital platform to facilitate modern exchange of goods and services.",
+      "gomaHackathonDesc": "Co-creation events designed to generate practical technology solutions in Goma.",
+      "shririkiDesc": "Collaborative initiative to strengthen social cohesion, local talent, and impact opportunities.",
+      "umojaDesc": "Community financing mechanism supporting high-impact social and economic projects."
+    },
     "proj1Desc": "Decentralized payment solution enabling merchants in Eastern Congo to accept crypto payments seamlessly.",
     "proj2Desc": "Blockchain-verified academic credentials for Congolese universities, fighting diploma fraud.",
     "proj3Desc": "Community governance platform for Nyiragongo environmental monitoring and disaster preparedness.",
@@ -196,6 +206,7 @@
     "impactDesc": "This program improves member retention, speeds up practical learning, and increases the number of participants who move into real project execution.",
     "donateTitle": "Donate",
     "donateDesc": "Your contributions help us fund intro sessions, learning resources, and onboarding support for new participants.",
+    "storyTitle": "Web3 Onboarding Program",
     "storyText": "Since 2023, Ujuzi Labs identified a strong need for Web3 education, especially around the Cardano blockchain. This led us to launch this program, through which at the end of each month we mobilize our limited resources and recruit young entrepreneurs, students, and technology enthusiasts to provide a one-week training on topics such as Web3, distributed ledger technology, blockchain, Cardano wallets, and other practical foundations for their journey.",
     "stats": {
       "cohorts": "Cohorts",
@@ -226,7 +237,68 @@
     },
     "cryptoTitle": "Via Crypto (Cardano)",
     "cryptoHow": "Connect your Cardano wallet, choose the amount you want to contribute, then confirm the transaction. Once validated, your contribution will support upcoming cohorts.",
-    "donateButton": "Donate"
+    "donateButton": "Donate",
+    "donateForm": {
+      "mobileHelp": "Fill in the details below to complete your donation via Mobile Money.",
+      "availableMethods": "Available methods",
+      "amountUsd": "Amount (USD)",
+      "fullName": "Full name",
+      "phone": "Phone",
+      "processing": "Processing...",
+      "continueFlutterwave": "Continue donation via Flutterwave",
+      "walletAddress": "Cardano wallet address",
+      "copyAddress": "Copy address",
+      "viewOnCardanoscan": "View on Cardanoscan",
+      "iHaveDonated": "I have donated",
+      "errors": {
+        "requiredFields": "Please provide name, email, and phone.",
+        "invalidAmount": "Please enter a valid amount.",
+        "missingFlutterwaveKey": "Flutterwave key missing (VITE_FLUTTERWAVE_PUBLIC_KEY).",
+        "incompleteFlutterwaveResponse": "Incomplete Flutterwave response. Verification impossible.",
+        "verifyFailed": "Payment initiated, but verification failed.",
+        "serverVerifyFailed": "Payment initiated, but server verification failed.",
+        "copyFailed": "Automatic copy failed. Please copy the address manually.",
+        "cryptoRecordFailed": "Unable to record your crypto donation at the moment.",
+        "cryptoServerError": "Server error while recording crypto donation."
+      },
+      "success": {
+        "paymentConfirmed": "Payment confirmed. Thank you for your contribution.",
+        "paymentPending": "Payment received and pending validation.",
+        "cryptoRecorded": "Thank you. Your crypto donation has been recorded for manual verification.",
+        "cryptoThanks": "Thank you for your contribution. Our team will verify the on-chain transaction."
+      }
+    }
+  },
+  "mtidano": {
+    "heroSubtitle": "Reforestation + blockchain for transparent, traceable, and sustainable environmental impact.",
+    "presentationTitle": "MTIDANO NFT Project Overview",
+    "presentationP1": "MTIDANO NFT is an initiative that combines reforestation and blockchain technology to create a transparent, traceable, and sustainable environmental management model. The project relies on a simple principle: each planted tree is represented by a dynamic NFT, linking a digital asset to real-world impact.",
+    "presentationP2": "This approach turns ecological actions into measurable, accessible, and verifiable assets.",
+    "moreDetails": "See more details about MTIDANO NFTree",
+    "previewAlt": "MTIDANO project preview",
+    "missionVisionTitle": "Mission and vision",
+    "missionVisionP1": "MTIDANO NFT's mission is to help restore degraded ecosystems, fight soil erosion, promote sustainable reforestation, improve transparency in environmental projects, and encourage participation through blockchain.",
+    "missionVisionP2": "The project aims to become a reference for integrating Web3 technology into environmental action, with a replicable model that can be tracked, funded, and scaled globally.",
+    "nftreeTitle": "How NFTree works",
+    "nftreeStep1": "Plant trees in areas vulnerable to water erosion in North and South Kivu.",
+    "nftreeStep2": "Accurately geolocate each tree using GPS coordinates with KoboToolbox.",
+    "nftreeStep3": "Collect images and growth/environment data.",
+    "nftreeStep4": "Associate data with a dynamic NFT that evolves over time.",
+    "nftreeStep5": "Ensure transparent monitoring by holders and local project partners.",
+    "impactTitle": "Impact, teams, and activities",
+    "impactIntro": "MTIDANO NFT already delivers concrete field results across multiple intervention zones (Bweremana, Shasha, Kiluku, Mukwidja, Kirotshe, Rueni, etc.).",
+    "operationsP1": "The project relies on close collaboration between environmental teams, technical teams, and local communities, using a hybrid value model that combines real ecological impact with blockchain innovation.",
+    "operationsP2": "Main activities: reforestation, erosion control, nursery setup, environmental awareness, forest stewardship, and publishing tree-linked NFTs on",
+    "officialSite": "Official site:",
+    "contactLabel": "Contact:",
+    "galleryTitle": "MTIDANO Gallery",
+    "stats": {
+      "trees": "Planted trees",
+      "zones": "Covered zones",
+      "hectares": "Restored hectares",
+      "beneficiaries": "Direct beneficiaries",
+      "years": "Years of activity"
+    }
   },
   "blog": {
     "title": "Blog & News",
