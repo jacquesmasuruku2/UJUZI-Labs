@@ -1,11 +1,20 @@
-import { useEffect, useState, type ElementType } from "react";
+import { useEffect, useMemo, useState, type ElementType } from "react";
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { BookOpen, Video, FileText, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { mediaToUrl, mediaArrayToUrls, strapiFetch } from "@/lib/strapi";
+import BlogPostsSection from "@/components/BlogPostsSection";
+import DocumentationGridSection from "@/components/DocumentationGridSection";
+import ToolsGridSection from "@/components/ToolsGridSection";
+import { mediaArrayToUrls, strapiFetch } from "@/lib/strapi";
 
-const fadeUp = { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true }, transition: { duration: 0.6 } };
+const fadeUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.6 },
+};
 
 const iconMap: Record<string, ElementType> = {
   bookOpen: BookOpen,
@@ -18,8 +27,12 @@ const iconMap: Record<string, ElementType> = {
 
 const RESOURCES_GALLERY_BASE_PATH = "/resources/gallery";
 
+/** Décalage pour navbar fixe (aligné Blockchains / About) */
+const NAVBAR_SCROLL_OFFSET = 96;
+
 const Resources = () => {
   const { t } = useTranslation();
+  const location = useLocation();
 
   type ResourceItem = { title: string; desc: string };
   type ResourceSection = { icon: ElementType; category: string; items: ResourceItem[] };
@@ -157,8 +170,9 @@ const Resources = () => {
                 const rit = r as { attributes?: Record<string, unknown> };
                 const rattrs = (rit.attributes ?? {}) as Record<string, unknown>;
                 const title = String(rattrs.title_fr ?? rattrs.title ?? "");
-                const desc =
-                  String(rattrs.description_fr ?? rattrs.desc_fr ?? rattrs.description ?? rattrs.desc ?? "");
+                const desc = String(
+                  rattrs.description_fr ?? rattrs.desc_fr ?? rattrs.description ?? rattrs.desc ?? ""
+                );
                 if (!title && !desc) return null;
                 return { title, desc };
               })
@@ -178,18 +192,68 @@ const Resources = () => {
     fetchResourceSections();
   }, []);
 
+  type FlatGalleryImage = { alt: string; imageUrl: string; key: string };
+
+  const galleryImages: FlatGalleryImage[] = useMemo(() => {
+    const out: FlatGalleryImage[] = [];
+    galleryEvents.forEach((event, eventIndex) => {
+      event.images.forEach((img, imgIndex) => {
+        out.push({
+          alt: img.alt,
+          imageUrl: img.imageUrl,
+          key: `${event.title}-${eventIndex}-${imgIndex}-${img.imageUrl}`,
+        });
+      });
+    });
+    return out;
+  }, [galleryEvents]);
+
+  /** Masonry : répartition en 4 colonnes (effet décalé comme la maquette) */
+  const galleryColumns = useMemo(() => {
+    const cols: FlatGalleryImage[][] = [[], [], [], []];
+    galleryImages.forEach((img, i) => {
+      cols[i % 4].push(img);
+    });
+    return cols;
+  }, [galleryImages]);
+
+  const galleryColumnOffset = [
+    "pt-8 md:pt-14 lg:pt-[3.75rem]",
+    "pt-0",
+    "pt-0 md:pt-2",
+    "pt-10 md:pt-16 lg:pt-[5.5rem]",
+  ] as const;
+
+  useEffect(() => {
+    const hash = location.hash.replace("#", "").trim();
+    if (!hash) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    const target = document.getElementById(decodeURIComponent(hash));
+    if (!target) return;
+    const targetTop = target.getBoundingClientRect().top + window.scrollY - NAVBAR_SCROLL_OFFSET;
+    window.scrollTo({ top: targetTop, behavior: "smooth" });
+  }, [location.hash, location.pathname]);
+
   return (
-    <div>
-      <section className="py-20 hero-gradient">
+    <div className="min-h-screen bg-background pt-20">
+      <section className="py-12 hero-gradient">
         <div className="container mx-auto px-4 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <h1 className="font-display text-4xl md:text-5xl font-bold mb-4"><span className="gradient-text">{t("resources.title")}</span></h1>
+            <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">
+              <span className="gradient-text">{t("resources.title")}</span>
+            </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">{t("resources.subtitle")}</p>
           </motion.div>
         </div>
       </section>
 
-      <section className="py-16">
+      <BlogPostsSection />
+      <DocumentationGridSection />
+      <ToolsGridSection />
+
+      <section id="catalog" className="scroll-mt-24 border-t border-border py-16">
         <div className="container mx-auto px-4 space-y-16">
           {sections.map((section, si) => (
             <div key={si}>
@@ -199,10 +263,17 @@ const Resources = () => {
               </div>
               <div className="grid md:grid-cols-3 gap-6">
                 {section.items.map((item, i) => (
-                  <motion.div key={i} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.1 }} className="glass rounded-xl p-6 hover:border-primary/30 transition-colors">
+                  <motion.div
+                    key={i}
+                    {...fadeUp}
+                    transition={{ ...fadeUp.transition, delay: i * 0.1 }}
+                    className="glass rounded-xl p-6 hover:border-primary/30 transition-colors"
+                  >
                     <h3 className="font-display font-semibold mb-2">{item.title}</h3>
                     <p className="text-sm text-muted-foreground mb-4">{item.desc}</p>
-                    <Button variant="link" className="p-0 h-auto text-primary"><Download className="mr-1 h-3 w-3" /> {t("resources.access")}</Button>
+                    <Button variant="link" className="p-0 h-auto text-primary">
+                      <Download className="mr-1 h-3 w-3" /> {t("resources.access")}
+                    </Button>
                   </motion.div>
                 ))}
               </div>
@@ -211,60 +282,45 @@ const Resources = () => {
         </div>
       </section>
 
-      <section id="gallery" className="py-16 bg-card/30">
-        <div className="container mx-auto px-4">
-          <div className="mb-10 text-center">
-            <h2 className="font-display text-3xl font-bold mb-3">
-              Galerie du Hub
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Découvrez quelques moments clés de UJUZI Labs Web3&nbsp;: événements, ateliers et temps forts avec la communauté.
-            </p>
-          </div>
+      <section id="gallery" className="scroll-mt-24 border-t border-border py-16 bg-card/30">
+        <div className="container mx-auto px-4 mb-10 text-center md:mb-12">
+          <h2 className="font-display text-3xl font-bold md:text-4xl mb-3">{t("resources.galleryTitle")}</h2>
+          <p className="mx-auto max-w-2xl text-muted-foreground md:text-base leading-relaxed">
+            {t("resources.gallerySubtitle")}
+          </p>
+        </div>
 
-          <div className="space-y-12">
-            {galleryEvents.map((event, eventIndex) => (
-              <motion.div
-                key={`${event.title}-${eventIndex}`}
-                {...fadeUp}
-                transition={{ ...fadeUp.transition, delay: eventIndex * 0.1 }}
-                className="glass !rounded-none p-6 md:p-8"
-              >
-                <div className="text-center max-w-3xl mx-auto">
-                  <h3 className="font-display text-2xl md:text-3xl font-bold">
-                    {event.title}
-                  </h3>
-                  <p className="text-muted-foreground mt-2 text-lg">
-                    {event.subtitle}
-                  </p>
-                  <p className="text-sm text-muted-foreground mt-3">
-                    {event.date}
-                  </p>
-                  <p className="text-muted-foreground mt-6 text-center leading-relaxed">
-                    {event.description}
-                  </p>
-                </div>
-
-                <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {event.images.map((img, imgIndex) => (
-                    <div
-                      key={`${eventIndex}-${imgIndex}`}
-                      className="glass !rounded-none overflow-hidden hover:border-primary/30 transition-colors"
+        <div className="container mx-auto max-w-6xl px-4">
+          {galleryImages.length === 0 ? (
+            <p className="text-center text-muted-foreground">{t("blog.noContent")}</p>
+          ) : (
+            <div className="flex flex-row gap-2 overflow-x-auto pb-4 snap-x snap-mandatory sm:gap-3 md:gap-4 md:overflow-visible md:snap-none">
+              {galleryColumns.map((colImages, colIndex) => (
+                <div
+                  key={colIndex}
+                  className={`flex min-w-[42vw] shrink-0 snap-start flex-col gap-2 sm:min-w-[38vw] sm:gap-3 md:min-w-0 md:flex-1 ${galleryColumnOffset[colIndex]}`}
+                >
+                  {colImages.map((img, imgIndex) => (
+                    <motion.div
+                      key={img.key}
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-40px" }}
+                      transition={{ duration: 0.45, delay: Math.min(imgIndex * 0.05, 0.35) }}
+                      className="overflow-hidden rounded-none border border-border/80 bg-background/40 hover:border-primary/30 transition-colors"
                     >
-                      <div className="relative aspect-[4/3] overflow-hidden !rounded-none">
-                        <img
-                          src={img.imageUrl}
-                          alt={img.alt}
-                          className="w-full h-full object-cover !rounded-none"
-                          loading="lazy"
-                        />
-                      </div>
-                    </div>
+                      <img
+                        src={img.imageUrl}
+                        alt={img.alt}
+                        className="block h-auto w-full rounded-none object-cover"
+                        loading="lazy"
+                      />
+                    </motion.div>
                   ))}
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </div>

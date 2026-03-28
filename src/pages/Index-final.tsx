@@ -3,17 +3,17 @@ import type { ElementType } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowRight, Users, Calendar, Rocket, Award, MapPin, Star, Zap, Globe } from "lucide-react";
+import { ArrowRight, Users, Calendar, Rocket, Trees, Star, Zap, Globe } from "lucide-react";
 import ModernButton from "@/components/ui/ModernButton";
 import ModernCard from "@/components/ui/ModernCard";
 import ModernSectionWrapper from "@/components/ui/ModernSectionWrapper";
 import Container from "@/components/ui/Container";
-import Ticker from "@/components/Ticker";
 import EventRegistrationModal from "@/components/EventRegistrationModal";
 import { useHeroAnimations } from "@/hooks/useHeroAnimations";
 import { useCountUp } from "@/hooks/useCountUp";
 import { mediaToUrl, strapiFetch } from "@/lib/strapi";
-import '@/components/EventCard.css';
+import { cn } from "@/lib/utils";
+import UpcomingEventsCarousel from "@/components/UpcomingEventsCarousel";
 
 interface Event {
   id?: string;
@@ -47,48 +47,75 @@ interface HomeBlogPost {
   created_at: string;
 }
 
-const StatCard = ({
+type StatItem = {
+  icon: ElementType;
+  value: number;
+  label: string;
+  suffix: string;
+};
+
+const StatBentoTile = ({
   stat,
-  index,
+  delay = 0,
+  className,
+  variant = "default",
 }: {
-  stat: { icon: ElementType; value: number; label: string; suffix: string };
-  index: number;
+  stat: StatItem;
+  delay?: number;
+  className?: string;
+  variant?: "default" | "wide" | "tall";
 }) => {
   const { count, elementRef } = useCountUp({
     end: stat.value,
     duration: 2500,
     startOnView: true,
   });
-
   const Icon = stat.icon;
 
   return (
     <motion.div
-      key={index}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      viewport={{ once: true }}
-      className="text-center"
+      transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, margin: "-40px" }}
+      whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+      role="group"
+      aria-label={stat.label}
+      className={cn("w-full min-w-0 text-left", className)}
     >
-      <ModernCard className="p-8 text-center">
-        <Icon
-          className={`h-10 w-10 mx-auto mb-4 ${
-            index === 0
-              ? "text-[#ffb800]"
-              : index === 1
-                ? "text-[#ffb800]"
-                : index === 2
-                  ? "text-[#ffb800]"
-                  : "text-[#ffb800]"
-          }`}
-        />
-        <div ref={elementRef} className="text-4xl font-bold mb-2 text-card-foreground">
-          {count}
-          {stat.suffix}
+      <div
+        className={cn(
+          "flex h-full flex-col rounded-3xl bg-[#fff8f0] p-5 text-left text-[#111111] shadow-[0_8px_30px_rgba(0,0,0,0.08)] ring-1 ring-black/[0.06] transition-shadow duration-300 hover:shadow-[0_14px_40px_rgba(0,0,0,0.12)] dark:bg-[#fff8f0] dark:ring-black/10",
+          variant === "tall" && "md:justify-between md:py-6",
+          variant === "wide" && "md:flex-row md:items-center md:gap-6 md:p-6 lg:p-7",
+          variant === "default" && "md:p-6"
+        )}
+      >
+        <div className={cn(variant === "wide" && "md:flex md:shrink-0 md:flex-col md:items-start")}>
+          <Icon
+            className="mb-2 h-7 w-7 text-[#111111] md:h-8 md:w-8"
+            strokeWidth={2}
+            aria-hidden
+          />
+          <div
+            ref={elementRef}
+            className="font-sans text-xs font-normal tabular-nums leading-snug text-[#111111] md:text-sm"
+          >
+            {count}
+            {stat.suffix}
+          </div>
         </div>
-        <div className="text-sm font-medium text-muted-foreground">{stat.label}</div>
-      </ModernCard>
+        <p
+          className={cn(
+            "mt-2 max-w-[22ch] font-medium leading-snug text-[#111111] md:max-w-none",
+            variant === "default" && "text-xs md:text-sm",
+            variant === "wide" && "mt-3 text-xs md:mt-0 md:flex-1 md:text-sm",
+            variant === "tall" && "text-xs md:text-sm lg:max-w-[16ch]"
+          )}
+        >
+          {stat.label}
+        </p>
+      </div>
     </motion.div>
   );
 };
@@ -101,6 +128,7 @@ const Index = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const { t, i18n } = useTranslation();
+
   const { heroRef, titleRef, buttonsRef, navigationRef } = useHeroAnimations(isLoading);
 
   const innovationSentenceWords = useMemo(
@@ -118,43 +146,88 @@ const Index = () => {
     setSelectedEvent(null);
   };
 
-  const stats = [
-    { icon: Users, value: 500, label: "Membres Actifs", suffix: "+" },
-    { icon: Calendar, value: 30, label: "Événements Organisés", suffix: "+" },
-    { icon: Rocket, value: 15, label: "Projets Lancés", suffix: "+" },
-    { icon: Award, value: 1000, label: "Bénéficiaires", suffix: "+" },
-  ];
+  const stats: StatItem[] = useMemo(
+    () => [
+      { icon: Users, value: 500, label: "Membres Actifs", suffix: "+" },
+      { icon: Calendar, value: 30, label: "Événements Organisés", suffix: "+" },
+      { icon: Rocket, value: 15, label: "Projets Lancés", suffix: "+" },
+      { icon: Trees, value: 10000, label: t("stats.treesPlanted"), suffix: "+" },
+    ],
+    [t]
+  );
 
   const hardcodedUpcomingEvents: Event[] = [
-    { 
-      title: "Workshop Blockchain Fondamentaux", 
-      date: "25 Mars 2026", 
-      type: "Workshop", 
+    {
+      id: "fallback-1",
+      title: "Workshop Blockchain Fondamentaux",
+      date: "25 Mars 2026",
+      type: "Workshop",
       location: "Goma Innovation Center",
       time: "14:00 - 18:00",
       image: "https://images.unsplash.com/photo-1639322533843-2b5a3b5b5b5?w=600&h=400&fit=crop",
       description: "Initiation aux concepts fondamentaux de la blockchain",
-      fullDescription: "Plongez dans l'univers fascinant de la blockchain avec ce workshop intensif. Vous apprendrez les concepts de base, les mécanismes de consensus, la cryptographie, et comment cette technologie révolutionnaire transforme les industries. Session pratique avec démonstrations live et études de cas concrets applicables au contexte africain."
+      fullDescription:
+        "Plongez dans l'univers fascinant de la blockchain avec ce workshop intensif. Vous apprendrez les concepts de base, les mécanismes de consensus, la cryptographie, et comment cette technologie révolutionnaire transforme les industries. Session pratique avec démonstrations live et études de cas concrets applicables au contexte africain.",
     },
-    { 
-      title: "Hackathon Web3 pour le Développement", 
-      date: "10 Avril 2026", 
-      type: "Hackathon", 
+    {
+      id: "fallback-2",
+      title: "Hackathon Web3 pour le Développement",
+      date: "10 Avril 2026",
+      type: "Hackathon",
       location: "Virunga Tech Park",
       time: "09:00 - 20:00",
       image: "https://images.unsplash.com/photo-1557683316-973673baf926?w=600&h=400&fit=crop",
       description: "48h de développement intensif pour créer des solutions Web3",
-      fullDescription: "Rejoignez-nous pour 48 heures de création intensive ! Formez des équipes, développez des solutions innovantes utilisant les technologies Web3, et présentez vos projets à un jury d'experts. Thème central : 'Technologie Blockchain pour le Développement Durable en RDC'. Prix exceptionnels et opportunités de financement pour les meilleurs projets."
+      fullDescription:
+        "Rejoignez-nous pour 48 heures de création intensive ! Formez des équipes, développez des solutions innovantes utilisant les technologies Web3, et présentez vos projets à un jury d'experts. Thème central : 'Technologie Blockchain pour le Développement Durable en RDC'. Prix exceptionnels et opportunités de financement pour les meilleurs projets.",
     },
-    { 
-      title: "Meetup Crypto et Investissement", 
-      date: "20 Avril 2026", 
-      type: "Meetup", 
+    {
+      id: "fallback-3",
+      title: "Meetup Crypto et Investissement",
+      date: "20 Avril 2026",
+      type: "Meetup",
       location: "Goma Hub HQ",
       time: "17:00 - 19:00",
       image: "https://images.unsplash.com/photo-1611224923853-80b0237ed8b3?w=600&h=400&fit=crop",
       description: "Réseautage et discussions sur les opportunités d'investissement crypto",
-      fullDescription: "Un meetup exclusif pour explorer les opportunités d'investissement dans les cryptomonnaies et projets blockchain. Échanges avec des investisseurs expérimentés, analyses de marché, et présentation de projets prometteurs. Session networking suivie d'un cocktail. Places limitées pour garantir des échanges de qualité."
+      fullDescription:
+        "Un meetup exclusif pour explorer les opportunités d'investissement dans les cryptomonnaies et projets blockchain. Échanges avec des investisseurs expérimentés, analyses de marché, et présentation de projets prometteurs. Session networking suivie d'un cocktail. Places limitées pour garantir des échanges de qualité.",
+    },
+    {
+      id: "fallback-4",
+      title: "Workshop Blockchain Fondamentaux — session 2",
+      date: "15 Avril 2026",
+      type: "Workshop",
+      location: "Goma Innovation Center",
+      time: "14:00 - 18:00",
+      image: "https://images.unsplash.com/photo-1639322533843-2b5a3b5b5b5?w=600&h=400&fit=crop",
+      description: "Initiation aux concepts fondamentaux de la blockchain",
+      fullDescription:
+        "Plongez dans l'univers fascinant de la blockchain avec ce workshop intensif. Vous apprendrez les concepts de base, les mécanismes de consensus, la cryptographie, et comment cette technologie révolutionnaire transforme les industries. Session pratique avec démonstrations live et études de cas concrets applicables au contexte africain.",
+    },
+    {
+      id: "fallback-5",
+      title: "Hackathon Web3 pour le Développement — édition printemps",
+      date: "22 Mai 2026",
+      type: "Hackathon",
+      location: "Virunga Tech Park",
+      time: "09:00 - 20:00",
+      image: "https://images.unsplash.com/photo-1557683316-973673baf926?w=600&h=400&fit=crop",
+      description: "48h de développement intensif pour créer des solutions Web3",
+      fullDescription:
+        "Rejoignez-nous pour 48 heures de création intensive ! Formez des équipes, développez des solutions innovantes utilisant les technologies Web3, et présentez vos projets à un jury d'experts. Thème central : 'Technologie Blockchain pour le Développement Durable en RDC'. Prix exceptionnels et opportunités de financement pour les meilleurs projets.",
+    },
+    {
+      id: "fallback-6",
+      title: "Meetup Crypto et Investissement — afterwork",
+      date: "5 Juin 2026",
+      type: "Meetup",
+      location: "Goma Hub HQ",
+      time: "17:00 - 19:00",
+      image: "https://images.unsplash.com/photo-1611224923853-80b0237ed8b3?w=600&h=400&fit=crop",
+      description: "Réseautage et discussions sur les opportunités d'investissement crypto",
+      fullDescription:
+        "Un meetup exclusif pour explorer les opportunités d'investissement dans les cryptomonnaies et projets blockchain. Échanges avec des investisseurs expérimentés, analyses de marché, et présentation de projets prometteurs. Session networking suivie d'un cocktail. Places limitées pour garantir des échanges de qualité.",
     },
   ];
 
@@ -179,7 +252,7 @@ const Index = () => {
         };
 
         const res = await strapiFetch<{ data: unknown[] }>(
-          "/api/events?filters[upcoming][$eq]=true&sort=date:asc&populate=image&pagination[pageSize]=6"
+          "/api/events?filters[upcoming][$eq]=true&sort=date:asc&populate=image&pagination[pageSize]=12"
         );
         const items = res.data || [];
 
@@ -239,37 +312,6 @@ const Index = () => {
   ];
 
   const [projectsList, setProjectsList] = useState<HomeProject[]>(hardcodedProjects);
-
-  type HomePartner = { name: string; logo: string; url: string };
-  const hardcodedPartners: HomePartner[] = [
-    {
-      name: "Apex Fusion",
-      logo: "/partners/apex.png",
-      url: "https://apexfusion.com/",
-    },
-    {
-      name: "Wada",
-      logo: "/partners/wada.jpg",
-      url: "https://wada.org/",
-    },
-    {
-      name: "Catalyst",
-      logo: "/partners/Catalyst.jpg",
-      url: "https://projectcatalyst.io/",
-    },
-    {
-      name: "Ekival",
-      logo: "/partners/Ekival.png",
-      url: "https://ekival.com/",
-    },
-    {
-      name: "ISDR-GL",
-      logo: "/partners/partner1.png",
-      url: "https://isdrgl.com",
-    },
-  ];
-
-  const [partnersList, setPartnersList] = useState<HomePartner[]>(hardcodedPartners);
 
   const [latestBlogPosts, setLatestBlogPosts] = useState<HomeBlogPost[]>([]);
   const [blogPostsLoading, setBlogPostsLoading] = useState(true);
@@ -360,39 +402,17 @@ const Index = () => {
       }
     };
 
-    const fetchPartners = async () => {
-      try {
-        const res = await strapiFetch<{ data: unknown[] }>(
-          "/api/partners?populate=logo&pagination[pageSize]=50"
-        );
-        const items = res.data || [];
-        const mapped: HomePartner[] = items
-          .map((item) => {
-            const it = item as { attributes?: Record<string, unknown>; id?: string | number };
-            const attrs = (it.attributes ?? {}) as Record<string, unknown>;
-            const name = String(attrs.name ?? "");
-            const url = String(attrs.url ?? "");
-            const logoUrl = mediaToUrl(attrs.logo) ?? "";
-            if (!name || !url || !logoUrl) return null;
-            return { name, url, logo: logoUrl };
-          })
-          .filter((p): p is HomePartner => p !== null);
-
-        if (mapped.length) setPartnersList(mapped);
-      } catch {
-        // fallback: hardcodedPartners
-      }
-    };
-
     fetchProjects();
-    fetchPartners();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
-      {/* Hero avec vidéo YouTube en arrière-plan */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden pt-20" ref={heroRef}>
+    <div className="min-h-screen text-foreground transition-colors duration-300">
+      {/* Hero : même fond que la section Mission/Vision (À propos) = --background ; voile au-dessus de la vidéo */}
+      <section
+        className="relative min-h-[90vh] flex items-center overflow-hidden ujuzi-textured-bg pt-20 dark:bg-transparent"
+        ref={heroRef}
+      >
         <div className="absolute inset-0">
           <iframe
             src="https://www.youtube.com/embed/3Lp9Zj2tSRo?autoplay=1&mute=1&loop=1&controls=0&playlist=3Lp9Zj2tSRo&showinfo=0&modestbranding=1&iv_load_policy=3&disablekb=1&rel=0&fs=0"
@@ -413,7 +433,7 @@ const Index = () => {
             title="UJUZI Labs Background Video"
             frameBorder="0"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-800/70 to-indigo-900/60" />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-950/40 via-indigo-950/30 to-slate-950/35 dark:from-blue-900/80 dark:via-blue-800/70 dark:to-indigo-900/60" />
         </div>
         
         <Container className="relative z-10 text-center">
@@ -459,25 +479,8 @@ const Index = () => {
         </Container>
       </section>
 
-      {/* Ticker */}
-      <Ticker />
-
-      {/* Stats */}
-      <ModernSectionWrapper background="gray" className="py-24">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, i) => (
-              <StatCard key={i} stat={stat} index={i} />
-            ))}
-          </div>
-        </motion.div>
-      </ModernSectionWrapper>
-
+      {/* Un seul fond continu (thème) : mission / visuels → impacts → blog */}
+      <div>
       {/* About */}
       <ModernSectionWrapper className="py-24">
         <Container size="lg">
@@ -526,24 +529,23 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="lg:col-span-7 text-center">
-              <div className="mb-6 rounded-2xl border border-border/70 bg-card/40 p-5 md:p-6">
-                <p className="text-xl md:text-[1.75rem] font-bold text-foreground leading-relaxed text-center">
-                  {innovationSentenceWords.map((word, index) => (
-                    <motion.span
-                      key={`${word}-${index}`}
-                      initial={{ opacity: 0, y: 8 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.24, delay: index * 0.035 }}
-                      className={`inline-block mr-2 ${index < 2 ? "text-[#ffb800]" : ""}`}
-                    >
-                      {word}
-                    </motion.span>
-                  ))}
+            <div className="flex flex-col items-center justify-center gap-6 lg:col-span-7">
+              <motion.div
+                initial={{ opacity: 0, y: 22 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="w-full max-w-2xl"
+              >
+                <p className="text-justify text-pretty hyphens-auto text-base font-bold leading-relaxed text-foreground sm:text-lg md:text-xl md:leading-relaxed lg:text-[1.35rem]">
+                  <span className="text-[#ffb800]">
+                    {innovationSentenceWords.slice(0, 2).join(" ")}
+                  </span>
+                  {innovationSentenceWords.length > 2
+                    ? ` ${innovationSentenceWords.slice(2).join(" ")}`
+                    : null}
                 </p>
-              </div>
-
+              </motion.div>
               <ModernButton variant="primary" href="/about" className="!bg-[#ffb800] !text-[#111111] hover:brightness-105 mx-auto">
                 <Globe className="mr-2 h-5 w-5" />
                 {t("home.learnMore")}
@@ -553,8 +555,69 @@ const Index = () => {
         </Container>
       </ModernSectionWrapper>
 
-      {/* Events */}
-      <ModernSectionWrapper background="gray" className="py-24">
+      {/* Stats — message fort à gauche, grille bento à droite */}
+      <ModernSectionWrapper className="py-20 md:py-28">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-14 xl:gap-16">
+          <motion.div
+            initial={{ opacity: 0, x: -28 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true, margin: "-60px" }}
+            className="relative lg:col-span-5"
+          >
+            <div
+              className="absolute -left-1 top-2 h-20 w-1 rounded-full bg-gradient-to-b from-[#ffb800] via-[#12B1A6] to-[#ffb800]/30 md:h-28 lg:top-3 lg:h-32"
+              aria-hidden
+            />
+            <h2 className="max-w-[16ch] pl-5 font-display text-[clamp(1.85rem,4.5vw,3.15rem)] font-extrabold leading-[1.06] tracking-[-0.02em] text-foreground md:max-w-[18ch] md:pl-6 lg:max-w-none lg:text-[clamp(2rem,2.8vw,3.35rem)]">
+              <span className="block text-balance">{t("home.statsImpactPart1")}</span>
+              <span className="mt-2 block bg-gradient-to-r from-[#ffb800] via-[#e6a600] to-[#ffb800] bg-clip-text text-balance text-transparent dark:from-[#ffd54d] dark:via-[#ffb800] dark:to-[#e6a600]">
+                {t("home.statsImpactPart2")}
+              </span>
+            </h2>
+            <div
+              className="mt-8 hidden h-px max-w-[200px] bg-gradient-to-r from-[#ffb800]/80 to-transparent md:block"
+              aria-hidden
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 28 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true, margin: "-60px" }}
+            className="min-w-0 lg:col-span-7"
+          >
+            <div className="grid auto-rows-fr grid-cols-1 gap-4 md:grid-cols-3 md:grid-rows-2 md:gap-4 lg:gap-5 md:min-h-[300px] lg:min-h-[340px]">
+              <StatBentoTile
+                stat={stats[0]}
+                delay={0}
+                className="md:col-start-1 md:row-start-1"
+              />
+              <StatBentoTile
+                stat={stats[1]}
+                delay={0.06}
+                className="md:col-start-2 md:row-start-1"
+              />
+              <StatBentoTile
+                stat={stats[2]}
+                delay={0.12}
+                variant="wide"
+                className="md:col-span-2 md:row-start-2"
+              />
+              <StatBentoTile
+                stat={stats[3]}
+                delay={0.18}
+                variant="tall"
+                className="md:col-start-3 md:row-start-1 md:row-span-2"
+              />
+            </div>
+          </motion.div>
+        </div>
+      </ModernSectionWrapper>
+
+      {/* Events — carrousel type maquette (carte centrale mise en avant) */}
+      <ModernSectionWrapper className="py-24">
         <div className="relative">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -562,82 +625,26 @@ const Index = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 text-foreground">
-              <div className="text-[#ffb800]">Événements à venir</div>
+            <h2 className="mb-4 text-center text-4xl font-bold md:text-5xl">
+              <span className="text-[#ffb800]">{t("home.upcomingTitle")}</span>
             </h2>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              {upcomingEvents.map((event, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: i * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <ModernCard className="overflow-hidden">
-                  {/* Image d'aperçu de l'événement */}
-                  <div className="event-image-container">
-                    <img 
-                      src={event.image} 
-                      alt={event.title}
-                      className="event-image"
-                    />
-                    <div className={`event-type-badge ${
-                      i === 0 ? 'bg-[#ffb800]' :
-                      i === 1 ? 'bg-[#ffb800]' :
-                      'bg-[#ffb800]'
-                    }`}>
-                      {event.type}
-                    </div>
-                  </div>
-                  
-                  <div className="event-content">
-                    <h3 className="text-2xl font-bold mb-4 text-card-foreground">{event.title}</h3>
-                    
-                    {/* Description complète de l'événement */}
-                    <div className="event-description">
-                      <p className="text-muted-foreground mb-4 leading-relaxed">
-                        {event.fullDescription}
-                      </p>
-                    </div>
-                    
-                    {/* Informations pratiques */}
-                    <div className="space-y-3 mb-6">
-                      <p className="flex items-center gap-2 text-muted-foreground">
-                        <Calendar className="h-4 w-4 text-[#ffb800]" />
-                        <span className="text-[#ffb800]">{event.date}</span>
-                      </p>
-                      <p className="flex items-center gap-2 text-muted-foreground">
-                        <MapPin className="h-4 w-4 text-red-500" />
-                        <span className="text-card-foreground">{event.location}</span>
-                      </p>
-                      <p className="flex items-center gap-2 text-muted-foreground">
-                        <Zap className="h-4 w-4 text-[#ffb800]" />
-                        <span className="text-[#ffb800]">{event.time}</span>
-                      </p>
-                    </div>
-                    
-                    {/* Bouton d'inscription */}
-                    <ModernButton 
-                      variant="primary" 
-                      className={`w-full ${
-                        i === 0 ? 'bg-[#ffb800] hover:bg-[#e6a600]' :
-                        i === 1 ? 'bg-[#ffb800] hover:bg-[#e6a600]' :
-                        'bg-[#ffb800] hover:bg-[#e6a600]'
-                      }`}
-                      onClick={() => handleOpenModal(event)}
-                    >
-                      S'inscrire maintenant
-                    </ModernButton>
-                  </div>
-                  </ModernCard>
-                </motion.div>
-              ))}
+            <p className="mx-auto mb-12 max-w-2xl text-center text-lg text-[#315795] dark:text-[#93c5fc] md:mb-16">
+              {t("home.upcomingSubtitle")}
+            </p>
+
+            <UpcomingEventsCarousel events={upcomingEvents} onRegister={handleOpenModal} />
+
+            <div className="mt-12 text-center">
+              <ModernButton
+                variant="outline"
+                href="/events"
+                className="border-[#2563eb]/50 text-[#1e40af] hover:border-[#2563eb] hover:bg-[#e8eef9] dark:border-[#3b82f6]/45 dark:text-[#93c5fc] dark:hover:bg-[#1a3055]/50"
+              >
+                {t("home.viewAllEvents")}
+              </ModernButton>
             </div>
           </motion.div>
         </div>
-        
       </ModernSectionWrapper>
 
       {/* Projects */}
@@ -679,7 +686,7 @@ const Index = () => {
       </ModernSectionWrapper>
 
       {/* Derniers articles blog */}
-      <ModernSectionWrapper background="gray" className="py-24">
+      <ModernSectionWrapper className="py-24">
         <Container size="lg">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -750,7 +757,7 @@ const Index = () => {
                 <div className="flex justify-center mt-12">
                   <ModernButton
                     variant="primary"
-                    href="/blog"
+                    href="/resources#blog"
                     size="lg"
                     className="!bg-[#ffb800] !text-[#111111] hover:brightness-105"
                   >
@@ -763,47 +770,7 @@ const Index = () => {
           </motion.div>
         </Container>
       </ModernSectionWrapper>
-
-      {/* Partenaires — même présentation que la page /partners */}
-      <section className="bg-[#1734a8] py-14 md:py-16">
-        <div className="container mx-auto px-4 text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="font-display text-3xl md:text-4xl font-bold mb-10 md:mb-12"
-          >
-            <span className="text-white">{t("partners.title")}</span>{" "}
-            <span className="text-[#ffb800]">{t("partners.titleHighlight")}</span>
-          </motion.h2>
-
-          <div className="relative overflow-hidden py-6 md:py-8">
-            <div className="flex w-max animate-scroll gap-5 md:gap-6 pr-5 md:pr-6">
-              {[...partnersList, ...partnersList].map((partner, i) => (
-                <div key={`${partner.name}-${i}`} className="flex-shrink-0">
-                  <a
-                    href={partner.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white rounded-2xl"
-                    aria-label={partner.name}
-                  >
-                    <div className="bg-black rounded-2xl border border-white/15 p-4 md:p-5 h-[100px] w-[200px] md:h-[108px] md:w-[220px] flex items-center justify-center shadow-md shadow-black/10">
-                      <img
-                        src={partner.logo}
-                        alt=""
-                        className="max-h-[72px] w-full object-contain"
-                        loading="lazy"
-                      />
-                    </div>
-                  </a>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      </div>
 
       {/* Modal d'inscription aux événements */}
       <EventRegistrationModal 

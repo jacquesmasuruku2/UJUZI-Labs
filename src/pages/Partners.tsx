@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import SectionHeading from "@/components/SectionHeading";
@@ -13,9 +14,19 @@ import { mediaToUrl, strapiFetch } from "@/lib/strapi";
 const fadeUp = { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true }, transition: { duration: 0.6 } };
 
 const Partners = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const { hash } = useLocation();
   const [showForm, setShowForm] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    if (hash.replace("#", "") !== "blockchains") return;
+    const el = document.getElementById("blockchains");
+    if (!el) return;
+    const navOffset = 96;
+    const top = el.getBoundingClientRect().top + window.scrollY - navOffset;
+    window.scrollTo({ top, behavior: "smooth" });
+  }, [hash]);
 
   type PartnerMarquee = { name: string; logo: string; description: string; url: string };
   const hardcodedMarqueePartners: PartnerMarquee[] = [
@@ -97,15 +108,15 @@ const Partners = () => {
 
   return (
     <div>
-      <section className="bg-[#1734a8] py-14 md:py-16 pt-24 md:pt-28">
+      <section className="relative bg-[#A5CEDD] pt-28 md:pt-32 pb-10 md:pb-12">
         <div className="container mx-auto px-4 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-display text-3xl md:text-4xl font-bold mb-10 md:mb-12"
+            className="font-display text-3xl md:text-5xl font-bold mb-3 md:mb-4 text-white tracking-tight"
           >
-            <span className="text-white">{t("partners.title")}</span>{" "}
-            <span className="text-[#ffb800]">{t("partners.titleHighlight")}</span>
+            <span className="block sm:inline">{t("partners.title")}</span>{" "}
+            <span className="block sm:inline font-extrabold text-white">{t("partners.titleHighlight")}</span>
           </motion.h1>
 
           <div className="relative overflow-hidden py-6 md:py-8">
@@ -116,10 +127,10 @@ const Partners = () => {
                     href={partner.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white rounded-2xl"
+                    className="block rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/90"
                     aria-label={partner.name}
                   >
-                    <div className="bg-black rounded-2xl border border-white/15 p-4 md:p-5 h-[100px] w-[200px] md:h-[108px] md:w-[220px] flex items-center justify-center shadow-md shadow-black/10">
+                    <div className="bg-white rounded-2xl border border-white/95 p-4 md:p-5 h-[100px] w-[200px] md:h-[108px] md:w-[220px] flex items-center justify-center shadow-[0_12px_40px_rgba(15,55,80,0.12)]">
                       <img
                         src={partner.logo}
                         alt=""
@@ -132,6 +143,14 @@ const Partners = () => {
               ))}
             </div>
           </div>
+
+          <a
+            href="#become-partner"
+            className="mt-8 inline-flex flex-col items-center gap-1 text-white/75 hover:text-white transition-colors"
+            aria-label={t("partners.continueBelow")}
+          >
+            <ChevronDown className="h-7 w-7 animate-bounce" strokeWidth={2.5} />
+          </a>
         </div>
       </section>
 
@@ -154,7 +173,7 @@ const Partners = () => {
         }
       `}</style>
 
-      <section className="py-20 bg-card/30">
+      <section id="become-partner" className="py-20 bg-card/30 scroll-mt-24">
         <div className="container mx-auto px-4">
           <motion.div {...fadeUp} className="max-w-2xl mx-auto">
             <SectionHeading

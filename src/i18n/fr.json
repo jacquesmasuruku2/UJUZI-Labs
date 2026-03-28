@@ -30,7 +30,11 @@
     "donate": "Donate",
     "partners": "Partenaires",
     "validators": "Validateurs",
-    "contact": "Contact"
+    "contact": "Contact",
+    "followUs": "Suivez-nous :",
+    "letsTalk": "Discutons",
+    "searchBlog": "Recherche blog",
+    "officeHours": "Dim – Ven (08h00 – 18h00)"
   },
   "hero": {
     "badge": "Hub d'Innovation Web3 — Afrique Centrale",
@@ -45,7 +49,7 @@
     "members": "Membres de la communauté",
     "events": "Événements organisés",
     "projects": "Projets incubés",
-    "beneficiaries": "Bénéficiaires"
+    "treesPlanted": "Arbres plantés"
   },
   "home": {
     "whatTitle": "Qu'est-ce que UJUZI Labs ?",
@@ -54,6 +58,9 @@
     "learnMore": "En savoir plus",
     "upcomingTitle": "Événements à venir",
     "upcomingSubtitle": "Rejoignez-nous pour des ateliers, hackathons et meetups.",
+    "registerNow": "S'inscrire maintenant",
+    "carouselPrevEvent": "Événement précédent",
+    "carouselNextEvent": "Événement suivant",
     "register": "S'inscrire",
     "viewAllEvents": "Voir tous les événements",
     "projectsTitle": "Projets incubés",
@@ -70,7 +77,9 @@
     "innovationMission": "Ujuzi Labs combine la technologie, l'éducation, l'agriculture et le développement durable pour bâtir un avenir innovant en RD Congo, en Afrique et sur l'échelle globale.",
     "latestBlogTitle": "Dernières actualités",
     "latestBlogSubtitle": "Articles récents depuis UJUZI Labs et l'écosystème Web3.",
-    "viewAllBlog": "Tous les articles"
+    "viewAllBlog": "Tous les articles",
+    "statsImpactPart1": "Des actions qui génèrent des",
+    "statsImpactPart2": "résultats tangibles"
   },
   "about": {
     "title": "À propos de",
@@ -197,7 +206,10 @@
     "r8Title": "Bases de la sécurité Blockchain",
     "r8Desc": "Pratiques de sécurité essentielles pour le développement de smart contracts.",
     "r9Title": "Guide de Tokenomics",
-    "r9Desc": "Comprendre l'économie et la conception des tokens."
+    "r9Desc": "Comprendre l'économie et la conception des tokens.",
+    "galleryTitle": "Galerie du Hub",
+    "gallerySubtitle": "Quelques moments clés de UJUZI Labs Web3 : événements, ateliers et temps forts avec la communauté.",
+    "galleryExplore": "Explorer"
   },
   "onboarding": {
     "title": "Onboarding Program",
@@ -302,6 +314,7 @@
     "becomeSubtitle": "Rejoignez notre réseau d'organisations qui construisent le Web3 en Afrique Centrale.",
     "getInTouch": "Nous contacter",
     "visit": "Visiter",
+    "continueBelow": "Aller au formulaire partenaire ci-dessous",
     "visitWebsite": "Visiter le site",
     "p1Desc": "Soutien à l'éducation blockchain et au développement Cardano en Afrique Centrale.",
     "p2Desc": "Partenaire d'infrastructure fournissant des solutions cross-chain.",

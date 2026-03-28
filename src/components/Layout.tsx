@@ -14,7 +14,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
   useSubpageScrollReveal();
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300">
+    <div className="ujuzi-site-shell min-h-screen flex flex-col text-foreground transition-colors duration-300">
       <Preloader onComplete={handlePreloaderComplete} />
       <Navbar />
       <main className={cn("flex-1", !isHome && "site-inner-pages")}>

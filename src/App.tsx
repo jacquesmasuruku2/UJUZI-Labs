@@ -17,6 +17,7 @@ import Resources from "./pages/Resources";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Partners from "./pages/Partners";
+import Blockchains from "./pages/Blockchains";
 import Contact from "./pages/Contact";
 import Validators from "./pages/Validators";
 import Documentation from "./pages/Documentation";
@@ -61,6 +62,7 @@ const App = () => (
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:id" element={<BlogPost />} />
               <Route path="/partners" element={<Partners />} />
+              <Route path="/blockchains" element={<Blockchains />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/validators" element={<Validators />} />
               <Route path="/documentation" element={<Documentation />} />

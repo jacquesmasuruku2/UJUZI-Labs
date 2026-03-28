@@ -601,7 +601,7 @@ const About = () => {
       </section>
 
       {/* Intervention Domains Section */}
-      <section className="about-section-light">
+      <section className="about-section">
         <Container size="lg">
           <div className="intervention-shell">
             <motion.div
@@ -644,7 +644,7 @@ const About = () => {
       </section>
 
       {/* Services Section */}
-      <section className="about-section-light" id="services">
+      <section className="about-section" id="services">
         <Container size="lg">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -770,7 +770,7 @@ const About = () => {
       )}
 
       {/* Team Section */}
-      <section className="team-section scroll-mt-24" id="team">
+      <section className="about-section scroll-mt-24" id="team">
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -869,18 +869,18 @@ const About = () => {
         </Container>
       </section>
 
-      {/* Partenaires (ancre #partners — même bande que l’accueil) */}
-      <section id="partners" className="bg-[#1734a8] py-14 md:py-16 scroll-mt-24">
+      {/* Partenaires — même fond que mission / vision / objectifs */}
+      <section id="partners" className="about-section scroll-mt-24">
         <div className="container mx-auto px-4 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="font-display text-3xl md:text-4xl font-bold mb-10 md:mb-12"
+            className="font-display text-3xl md:text-5xl font-bold mb-10 md:mb-12 text-foreground tracking-tight"
           >
-            <span className="text-white">{t("partners.title")}</span>{" "}
-            <span className="text-[#ffb800]">{t("partners.titleHighlight")}</span>
+            <span className="block sm:inline">{t("partners.title")}</span>{" "}
+            <span className="block sm:inline font-extrabold text-[#ffb800]">{t("partners.titleHighlight")}</span>
           </motion.h2>
 
           <div className="relative overflow-hidden py-6 md:py-8">
@@ -891,10 +891,10 @@ const About = () => {
                     href={partner.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white rounded-2xl"
+                    className="block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                     aria-label={`${t("partners.visit")} — ${partner.name}`}
                   >
-                    <div className="bg-black rounded-2xl border border-white/15 p-4 md:p-5 h-[100px] w-[200px] md:h-[108px] md:w-[220px] flex items-center justify-center shadow-md shadow-black/10">
+                    <div className="bg-white rounded-2xl border border-white/95 p-4 md:p-5 h-[100px] w-[200px] md:h-[108px] md:w-[220px] flex items-center justify-center shadow-[0_12px_40px_rgba(15,55,80,0.12)]">
                       <img
                         src={partner.logo}
                         alt=""
@@ -911,7 +911,7 @@ const About = () => {
       </section>
 
       {/* Contact (ancre #contact) */}
-      <section id="contact" className="about-section-light scroll-mt-24">
+      <section id="contact" className="about-section scroll-mt-24">
         <Container size="md">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

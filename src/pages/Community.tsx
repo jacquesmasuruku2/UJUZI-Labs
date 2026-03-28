@@ -78,7 +78,8 @@ function WhatsAppIcon({ className }: { className?: string }) {
   );
 }
 
-const Community = () => {
+/** Contenu principal (réutilisé sur la page Écosystème /blockchains#community) */
+export function CommunityPageBody() {
   const { t } = useTranslation();
 
   const whatsappUrl =
@@ -252,7 +253,7 @@ const Community = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-[#1734a8]">
+      <section className="py-20 bg-brand-navy text-[hsl(42_28%_96%)]">
         <div className="container mx-auto px-4">
           <motion.div {...fadeUp} className="max-w-2xl mx-auto text-center">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
@@ -287,6 +288,12 @@ const Community = () => {
       </section>
     </div>
   );
-};
+}
+
+const Community = () => (
+  <div className="pt-20">
+    <CommunityPageBody />
+  </div>
+);
 
 export default Community;

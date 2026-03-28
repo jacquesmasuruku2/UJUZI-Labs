@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { Mail, Phone, MapPin } from "lucide-react";
-import { IconDiscord, IconGitHub, IconTelegram, IconX } from "./FooterSocialIcons";
 import { useToast } from "@/hooks/use-toast";
+import { socialLinks } from "@/data/socialLinks";
 import { strapiFetch } from "@/lib/strapi";
 
 const Footer = () => {
@@ -32,9 +32,9 @@ const Footer = () => {
       labelKey: "footer.resources",
       order: 1,
       items: [
-        { labelKey: "nav.blog", path: "/blog" },
-        { labelKey: "nav.documentation", path: "/documentation" },
-        { labelKey: "nav.tools", path: "/tools" },
+        { labelKey: "nav.blog", path: "/resources#blog" },
+        { labelKey: "nav.documentation", path: "/resources#documentation" },
+        { labelKey: "nav.tools", path: "/resources#tools" },
         { labelKey: "nav.contact", path: "/contact" },
       ],
     },
@@ -108,7 +108,7 @@ const Footer = () => {
   )}`;
 
   return (
-    <footer className="bg-background border-t border-border text-foreground transition-colors duration-300">
+    <footer className="border-t border-border bg-gradient-to-b from-muted/40 to-background text-foreground transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
@@ -122,36 +122,17 @@ const Footer = () => {
             </div>
             <div className="flex flex-col gap-4 pt-1">
               <div className="flex flex-wrap gap-3">
-                <a
-                  href="https://x.com/StakeGoma"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[#000000] text-white shadow-sm ring-1 ring-black/10 dark:ring-white/20 transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  aria-label="X"
-                >
-                  <IconX className="h-[18px] w-[18px]" />
-                </a>
-                <a
-                  href="#"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[#5865F2] text-white shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  aria-label="Discord"
-                >
-                  <IconDiscord className="h-[22px] w-[22px]" />
-                </a>
-                <a
-                  href="https://t.me/CardanoGomaCommunity"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[#26A5E4] text-white shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  aria-label="Telegram"
-                >
-                  <IconTelegram className="h-[22px] w-[22px]" />
-                </a>
-                <a
-                  href="#"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-[#24292F] text-white shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  aria-label="GitHub"
-                >
-                  <IconGitHub className="h-[22px] w-[22px]" />
-                </a>
+                {socialLinks.map(({ href, ariaLabel, Icon, iconClassName }) => (
+                  <a
+                    key={ariaLabel}
+                    href={href}
+                    {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    className={`inline-flex h-10 w-10 items-center justify-center rounded-lg shadow-sm transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 dark:ring-white/20 ${iconClassName}`}
+                    aria-label={ariaLabel}
+                  >
+                    <Icon className={ariaLabel === "X" ? "h-[18px] w-[18px]" : "h-[22px] w-[22px]"} />
+                  </a>
+                ))}
               </div>
               <div className="space-y-2">
                 <a href="mailto:contact@ujiuzilabs.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-[#ffb800] transition-colors">

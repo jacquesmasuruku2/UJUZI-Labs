@@ -30,7 +30,11 @@
     "donate": "Donate",
     "partners": "Partners",
     "validators": "Validators",
-    "contact": "Contact"
+    "contact": "Contact",
+    "followUs": "Follow Us:",
+    "letsTalk": "Let's Talk",
+    "searchBlog": "Blog search",
+    "officeHours": "Sun – Fri (08:00 – 18:00)"
   },
   "hero": {
     "badge": "Web3 Innovation Hub — Central Africa",
@@ -45,7 +49,7 @@
     "members": "Community Members",
     "events": "Events Organized",
     "projects": "Projects Incubated",
-    "beneficiaries": "Beneficiaries"
+    "treesPlanted": "Trees planted"
   },
   "home": {
     "whatTitle": "What is UJUZI Labs?",
@@ -54,6 +58,9 @@
     "learnMore": "Learn More",
     "upcomingTitle": "Upcoming Events",
     "upcomingSubtitle": "Join us for workshops, hackathons, and meetups.",
+    "registerNow": "Register now",
+    "carouselPrevEvent": "Previous event",
+    "carouselNextEvent": "Next event",
     "register": "Register",
     "viewAllEvents": "View All Events",
     "projectsTitle": "Incubated Projects",
@@ -70,7 +77,9 @@
     "innovationMission": "Ujuzi Labs combines technology, education, agriculture and sustainable development to build an innovative future in DR Congo, in Africa and on a global scale.",
     "latestBlogTitle": "Latest news",
     "latestBlogSubtitle": "Recent articles from UJUZI Labs and the Web3 ecosystem.",
-    "viewAllBlog": "View all articles"
+    "viewAllBlog": "View all articles",
+    "statsImpactPart1": "Actions that deliver",
+    "statsImpactPart2": "tangible results"
   },
   "about": {
     "title": "About",
@@ -197,7 +206,10 @@
     "r8Title": "Blockchain Security Basics",
     "r8Desc": "Essential security practices for smart contract development.",
     "r9Title": "Tokenomics Guide",
-    "r9Desc": "Understanding token economics and design."
+    "r9Desc": "Understanding token economics and design.",
+    "galleryTitle": "Hub Gallery",
+    "gallerySubtitle": "Key moments from UJUZI Labs Web3: events, workshops, and community highlights.",
+    "galleryExplore": "Explore"
   },
   "onboarding": {
     "title": "Onboarding Program",
@@ -302,6 +314,7 @@
     "becomeSubtitle": "Join our network of organizations building Web3 in Central Africa.",
     "getInTouch": "Get in Touch",
     "visit": "Visit",
+    "continueBelow": "Scroll to partner form below",
     "visitWebsite": "Visit website",
     "p1Desc": "Supporting blockchain education and Cardano development in Central Africa.",
     "p2Desc": "Infrastructure partner providing cross-chain solutions.",

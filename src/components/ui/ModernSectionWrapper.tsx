@@ -12,7 +12,7 @@ const ModernSectionWrapper: React.FC<SectionWrapperProps> = ({
   background = "white" 
 }) => {
   const backgroundClasses = {
-    white: "bg-background",
+    white: "ujuzi-textured-bg",
     gray: "bg-secondary",
     light: "bg-muted",
   };
