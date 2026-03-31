@@ -25,6 +25,7 @@ import Tools from "./pages/Tools";
 import OnboardingProgram from "./pages/OnboardingProgram";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import LumaEvents from "./pages/LumaEvents";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -56,6 +57,7 @@ const App = () => (
               <Route path="/about" element={<About />} />
               <Route path="/events" element={<Events />} />
               <Route path="/events/:id" element={<EventDetail />} />
+              <Route path="/luma-events" element={<LumaEvents />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/community" element={<Community />} />
               <Route path="/resources" element={<Resources />} />

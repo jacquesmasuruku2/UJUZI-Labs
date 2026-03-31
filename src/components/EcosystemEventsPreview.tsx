@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { Calendar, MapPin, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { strapiFetch } from "@/lib/strapi";
+import { ArrowRight } from "lucide-react";
+import { mediaToUrl, strapiFetch } from "@/lib/strapi";
+import EventVisualCard from "@/components/events/EventVisualCard";
+import { cn } from "@/lib/utils";
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -23,10 +25,12 @@ type EventData = {
   location: string;
   type: string;
   upcoming: boolean;
+  time?: string | null;
+  imageUrl?: string | null;
 };
 
 /** Aperçu événements sur la page Écosystème (#events) — défilement vers la page complète */
-export const EcosystemEventsPreview = () => {
+export const EcosystemEventsPreview = ({ showDivider = true }: { showDivider?: boolean }) => {
   const { t, i18n } = useTranslation();
   const isFr = i18n.language.startsWith("fr");
   const [events, setEvents] = useState<EventData[]>([]);
@@ -46,6 +50,8 @@ export const EcosystemEventsPreview = () => {
             location?: string;
             type?: string;
             upcoming?: boolean;
+            time?: string | null;
+            image?: unknown;
           };
         };
 
@@ -66,6 +72,8 @@ export const EcosystemEventsPreview = () => {
               location: it.attributes?.location ?? "",
               type: it.attributes?.type ?? "",
               upcoming: !!it.attributes?.upcoming,
+              time: (it.attributes?.time as string | null | undefined) ?? null,
+              imageUrl: mediaToUrl(it.attributes?.image) ?? null,
             };
           })
           .filter((e) => e.id && e.date && e.location && e.type);
@@ -97,10 +105,12 @@ export const EcosystemEventsPreview = () => {
       title_fr: null,
       description: t("events.event1Desc"),
       description_fr: null,
-      date: "2026-03-25",
+      date: "2026-04-01",
       location: "Goma Innovation Center",
       type: "Workshop",
       upcoming: true,
+      time: "14:00 - 18:00",
+      imageUrl: "https://images.unsplash.com/photo-1639322533843-2b5a3b5b5b5?w=800&h=600&fit=crop",
     },
     {
       id: "2",
@@ -112,6 +122,8 @@ export const EcosystemEventsPreview = () => {
       location: "Virunga Tech Park",
       type: "Hackathon",
       upcoming: true,
+      time: "09:00 - 20:00",
+      imageUrl: "https://images.unsplash.com/photo-1557683316-973673baf926?w=800&h=600&fit=crop",
     },
     {
       id: "3",
@@ -123,6 +135,8 @@ export const EcosystemEventsPreview = () => {
       location: "Goma Hub HQ",
       type: "Meetup",
       upcoming: true,
+      time: "17:00 - 19:00",
+      imageUrl: "https://images.unsplash.com/photo-1611224923853-80b0237ed8b3?w=800&h=600&fit=crop",
     },
   ];
 
@@ -135,7 +149,10 @@ export const EcosystemEventsPreview = () => {
   return (
     <section
       id="events"
-      className="scroll-mt-24 border-t border-border bg-muted/30 py-16 md:py-20 dark:bg-muted/10"
+      className={cn(
+        "scroll-mt-24 bg-muted/30 py-16 md:py-20 dark:bg-muted/10",
+        showDivider && "border-t border-border"
+      )}
     >
       <div className="container mx-auto px-4">
         <div className="mx-auto mb-10 max-w-2xl text-center md:mb-12">
@@ -148,32 +165,31 @@ export const EcosystemEventsPreview = () => {
         {loading ? (
           <p className="py-8 text-center text-muted-foreground">{t("admin.loading")}</p>
         ) : (
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-3">
             {upcoming.map((event, i) => (
               <motion.div
                 key={event.id}
                 {...fadeUp}
                 transition={{ ...fadeUp.transition, delay: i * 0.08 }}
-                className="glass rounded-xl p-6 transition-colors hover:border-primary/30"
+                className="h-full"
               >
-                <span className="mb-3 inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-                  {event.type}
-                </span>
-                <h3 className="font-display mb-2 text-xl font-semibold">{getTitle(event)}</h3>
-                <p className="mb-4 line-clamp-2 text-sm text-muted-foreground">{getDesc(event)}</p>
-                <div className="mb-4 flex flex-wrap gap-4 text-sm text-muted-foreground">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="h-4 w-4" /> {event.date}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <MapPin className="h-4 w-4" /> {event.location}
-                  </span>
-                </div>
-                <Button variant="outline-glow" size="sm" asChild>
-                  <Link to={`/events/${event.id}`}>
-                    {t("events.viewDetails")} <ArrowRight className="ml-1 h-3 w-3" />
-                  </Link>
-                </Button>
+                <EventVisualCard
+                  compact
+                  showTime={true}
+                  event={{
+                    id: event.id,
+                    title: getTitle(event),
+                    description: getDesc(event),
+                    date: event.date,
+                    type: event.type,
+                    location: event.location,
+                    time: event.time ?? null,
+                    imageUrl: event.imageUrl ?? null,
+                  }}
+                  primaryHref={`/events/${event.id}`}
+                  primaryLabel={t("home.registerNow")}
+                  className="h-full"
+                />
               </motion.div>
             ))}
           </div>
@@ -185,6 +201,17 @@ export const EcosystemEventsPreview = () => {
               {t("home.viewAllEvents")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
+          </Button>
+        </div>
+
+        <div className="mt-4 flex justify-center">
+          <Button
+            variant="outline-glow"
+            size="lg"
+            asChild
+            className="border-[#2563eb]/50 text-[#1e40af] hover:border-[#2563eb] hover:bg-[#e8eef9] dark:border-[#3b82f6]/45 dark:text-[#93c5fc] dark:hover:bg-[#1a3055]/50"
+          >
+            <Link to="/luma-events">{t("events.onLuma")}</Link>
           </Button>
         </div>
       </div>

@@ -31,10 +31,10 @@ const Blockchains = () => {
 
   return (
     <div className="min-h-screen bg-background pt-20">
-      <BlockchainEcosystemSection lang={i18n.language} />
-      <EcosystemValidatorsSection />
-      <EcosystemEventsPreview />
-      <div id="community" className="scroll-mt-24 border-t border-border">
+      <BlockchainEcosystemSection lang={i18n.language} showDivider={false} />
+      <EcosystemValidatorsSection showDivider={false} />
+      <EcosystemEventsPreview showDivider={false} />
+      <div id="community" className="scroll-mt-24">
         <CommunityPageBody />
       </div>
     </div>

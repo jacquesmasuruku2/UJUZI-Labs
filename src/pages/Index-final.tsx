@@ -410,7 +410,7 @@ const Index = () => {
     <div className="min-h-screen text-foreground transition-colors duration-300">
       {/* Hero : même fond que la section Mission/Vision (À propos) = --background ; voile au-dessus de la vidéo */}
       <section
-        className="relative min-h-[90vh] flex items-center overflow-hidden ujuzi-textured-bg pt-20 dark:bg-transparent"
+        className="relative min-h-[90vh] flex items-center overflow-hidden bg-background pt-20 dark:bg-transparent"
         ref={heroRef}
       >
         <div className="absolute inset-0">

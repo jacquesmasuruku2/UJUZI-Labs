@@ -125,24 +125,7 @@
     transition: background-color 0.3s, color 0.3s;
   }
 
-  /*
-   * Texture organique (tuile SVG) : coque Layout + sections « blanches » (ex. accueil).
-   * Sans la classe sur les sections, bg-background masque entièrement le motif.
-   */
-  .ujuzi-site-shell,
-  .ujuzi-textured-bg {
-    background-color: hsl(var(--background));
-    background-image: url("/textures/organic-pattern.svg");
-    background-repeat: repeat;
-    background-size: 200px 200px;
-    background-attachment: scroll;
-  }
-
-  .dark .ujuzi-site-shell,
-  .dark .ujuzi-textured-bg {
-    background-image: url("/textures/organic-pattern-dark.svg");
-    background-size: 200px 200px;
-  }
+  /* Texture organique : désactivée (motif retiré de l'ensemble du site). */
 
   h1,
   h2,

@@ -1,7 +1,8 @@
 import { useCallback, useLayoutEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FileCode2, GitBranch, Landmark, Layers, Leaf, Sparkles } from "lucide-react";
+import { ExternalLink, FileCode2, GitBranch, Landmark, Layers, Leaf, Sparkles } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
   BLOCKCHAIN_ORDER,
@@ -79,7 +80,13 @@ const ChainLogo = ({
   );
 };
 
-const BlockchainEcosystemSection = ({ lang }: { lang: string }) => {
+const BlockchainEcosystemSection = ({
+  lang,
+  showDivider = true,
+}: {
+  lang: string;
+  showDivider?: boolean;
+}) => {
   const copy = getBlockchainCopy(lang);
   const ui = getBlockchainUi(lang);
   const intro = getBlockchainIntro(lang);
@@ -103,7 +110,10 @@ const BlockchainEcosystemSection = ({ lang }: { lang: string }) => {
   return (
     <section
       id="blockchains"
-      className="relative scroll-mt-24 overflow-hidden border-y border-slate-200/80 bg-[#F9F8F7] py-16 dark:border-white/5 dark:bg-gradient-to-b dark:from-slate-950 dark:via-[#0b1220] dark:to-slate-950 md:py-24"
+      className={cn(
+        "relative scroll-mt-24 overflow-hidden bg-[#F9F8F7] py-16 dark:bg-gradient-to-b dark:from-slate-950 dark:via-[#0b1220] dark:to-slate-950 md:py-24",
+        showDivider && "border-y border-slate-200/80 dark:border-white/5"
+      )}
     >
       <div
         className="pointer-events-none absolute inset-0 hidden opacity-[0.12] dark:block"
@@ -159,6 +169,18 @@ const BlockchainEcosystemSection = ({ lang }: { lang: string }) => {
                     chain.accent
                   )}
                 />
+                {chain.websiteUrl ? (
+                  <a
+                    href={chain.websiteUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    aria-label={`Ouvrir le site de ${chain.name} dans un nouvel onglet`}
+                    className="absolute right-4 top-4 z-10 rounded-full bg-white/70 p-2 text-slate-900 shadow-sm ring-1 ring-slate-200/60 backdrop-blur transition hover:scale-105 dark:bg-slate-950/60 dark:text-white dark:ring-white/10"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                ) : null}
                 <div className="relative flex flex-col items-center gap-3 text-center">
                   <div className="rounded-2xl bg-[#F9F8F7] p-3 ring-1 ring-slate-200/80 transition-transform duration-300 group-hover:scale-105 dark:bg-white/5 dark:ring-white/10">
                     <ChainLogo url={chain.logoUrl} name={chain.name} accent={chain.accent} />
@@ -201,7 +223,7 @@ const BlockchainEcosystemSection = ({ lang }: { lang: string }) => {
                     <div className="rounded-2xl bg-white/5 p-3 ring-1 ring-white/10">
                       <ChainLogo url={active.logoUrl} name={active.name} accent={active.accent} />
                     </div>
-                    <div>
+                    <div className="flex-1">
                       <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#12B1A6]">
                         {ui.sheetEyebrow}
                       </p>
@@ -209,6 +231,14 @@ const BlockchainEcosystemSection = ({ lang }: { lang: string }) => {
                         {active.name}
                       </SheetTitle>
                     </div>
+                    {active.websiteUrl ? (
+                      <Button asChild variant="outline-glow" size="sm" className="shrink-0">
+                        <a href={active.websiteUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2">
+                          <ExternalLink className="h-4 w-4" />
+                          {ui.visitSite}
+                        </a>
+                      </Button>
+                    ) : null}
                   </div>
                 </SheetHeader>
 

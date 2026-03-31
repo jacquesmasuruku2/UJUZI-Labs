@@ -10,11 +10,11 @@ import { cn } from "@/lib/utils";
 const Layout = ({ children }: { children: ReactNode }) => {
   const { isLoading, handlePreloaderComplete } = useGlobalLoader();
   const { pathname } = useLocation();
-  const isHome = pathname === "/";
   useSubpageScrollReveal();
+  const isHome = pathname === "/";
 
   return (
-    <div className="ujuzi-site-shell min-h-screen flex flex-col text-foreground transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300">
       <Preloader onComplete={handlePreloaderComplete} />
       <Navbar />
       <main className={cn("flex-1", !isHome && "site-inner-pages")}>

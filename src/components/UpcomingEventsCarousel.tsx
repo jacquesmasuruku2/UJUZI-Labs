@@ -106,17 +106,19 @@ function EventSlideCard({
     return (
       <div
         className={cn(
-          "flex min-h-[360px] flex-col overflow-hidden rounded-2xl bg-gradient-to-br from-[#1e4a7e] via-[#173a62] to-[#0f2847] p-5 text-white shadow-2xl ring-1 ring-[#3b82f6]/40 md:min-h-[480px] md:rounded-3xl md:p-8",
+          "flex min-h-[245px] flex-col overflow-hidden rounded-2xl bg-gradient-to-br from-[#1e4a7e] via-[#173a62] to-[#0f2847] p-4 text-white shadow-2xl ring-1 ring-[#3b82f6]/35 md:min-h-[330px] md:rounded-3xl md:p-4",
           className
         )}
       >
         {header}
-        <h3 className="mt-5 font-display text-xl font-bold leading-[1.15] tracking-tight text-white md:text-2xl lg:text-[1.65rem]">
+        <h3 className="mt-2 font-display text-lg font-bold leading-[1.15] tracking-tight text-white md:text-[1.05rem]">
           {event.title}
         </h3>
-        <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-white/75 md:text-base">{blurb}</p>
+        <p className="mt-0.5 line-clamp-3 text-sm leading-relaxed text-white/75 md:text-[0.925rem]">
+          {blurb}
+        </p>
 
-        <div className="mt-5 space-y-2.5 text-sm">
+        <div className="mt-4 space-y-2 text-sm">
           <p className="flex items-center gap-2 text-[#ffb800]">
             <Calendar className="h-4 w-4 shrink-0" />
             {event.date}
@@ -131,8 +133,8 @@ function EventSlideCard({
           </p>
         </div>
 
-        <div className="mt-auto overflow-hidden rounded-2xl pt-6">
-          <div className="aspect-[16/10] w-full overflow-hidden rounded-xl bg-[#0a3d44] ring-1 ring-[#12B1A6]/25">
+        <div className="mt-auto overflow-hidden rounded-2xl pt-2">
+          <div className="aspect-[16/7.5] w-full overflow-hidden rounded-xl bg-[#0a3d44] ring-1 ring-[#12B1A6]/25">
             <img src={img} alt={event.title} className="h-full w-full object-cover" />
           </div>
         </div>
@@ -140,7 +142,8 @@ function EventSlideCard({
         {isInteractive && onRegister && (
           <ModernButton
             variant="primary"
-            className="mt-6 w-full bg-[#ffb800] font-bold text-[#1e3a8a] hover:bg-[#e6a600]"
+            size="sm"
+            className="mt-4 w-full bg-[#ffb800] font-bold text-[#1e3a8a] hover:bg-[#e6a600]"
             onClick={onRegister}
           >
             {t("home.registerNow")}
@@ -222,7 +225,7 @@ const UpcomingEventsCarousel = ({ events, onRegister }: UpcomingEventsCarouselPr
           <ChevronLeft className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.25} />
         </button>
 
-        <div className="grid min-h-0 max-w-[1100px] flex-1 grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)_minmax(0,1fr)] items-stretch gap-3 lg:gap-5">
+        <div className="grid min-h-0 max-w-[1100px] flex-1 grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] items-stretch gap-3 lg:gap-5">
           <motion.div
             className="min-w-0 origin-right"
             initial={false}
