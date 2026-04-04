@@ -1,4 +1,4 @@
-# Structure du dépôt UJUZI Labs (frontend)
+# Structure que j'ai modifiée pour le du dépôt UJUZI Labs (frontend)
 
 Arborescence cible alignée sur l’organisation **app / features / pages par domaine / services**. Point d’entrée Vite : `index.html` → `src/app/main.tsx`.
 
