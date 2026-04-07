@@ -35,11 +35,7 @@
 }
 
 .modal-title {
-<<<<<<< HEAD
-  font-family: "SN Pro", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-=======
   font-family: 'SF Pro Display', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
->>>>>>> origin/master
   font-size: 24px;
   font-weight: 600;
   color: #1f2937;
@@ -68,11 +64,7 @@
 }
 
 .event-title {
-<<<<<<< HEAD
-  font-family: "SN Pro", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-=======
   font-family: 'SF Pro Display', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
->>>>>>> origin/master
   font-size: 18px;
   font-weight: 600;
   color: #1f2937;
@@ -115,11 +107,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-<<<<<<< HEAD
-  font-family: "SN Pro", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-=======
   font-family: 'SF Pro Display', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
->>>>>>> origin/master
   font-size: 14px;
   font-weight: 500;
   color: #374151;
@@ -132,11 +120,7 @@
   padding: 12px 16px;
   border: 1px solid #d1d5db;
   border-radius: 8px;
-<<<<<<< HEAD
-  font-family: "SN Pro", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-=======
   font-family: 'SF Pro Display', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
->>>>>>> origin/master
   font-size: 14px;
   color: #1f2937;
   background: white;
@@ -175,11 +159,7 @@
   background: white;
   color: #6b7280;
   border-radius: 8px;
-<<<<<<< HEAD
-  font-family: "SN Pro", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-=======
   font-family: 'SF Pro Display', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
->>>>>>> origin/master
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -197,11 +177,7 @@
   color: white;
   border: none;
   border-radius: 8px;
-<<<<<<< HEAD
-  font-family: "SN Pro", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-=======
   font-family: 'SF Pro Display', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
->>>>>>> origin/master
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;

@@ -2,11 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-<<<<<<< HEAD
-import { ArrowRight, Users, Calendar, Rocket, Trees, ChevronRight, MapPin, ExternalLink } from "lucide-react";
-=======
 import { ArrowRight, Users, Calendar, Rocket, Award, ChevronRight, MapPin, ExternalLink } from "lucide-react";
->>>>>>> origin/master
 import { useToast } from "@/hooks/use-toast";
 import { strapiFetch } from "@/lib/strapi";
 import CustomButton from "@/components/ui/CustomButton";
@@ -37,11 +33,7 @@ const Index = () => {
     { icon: Users, value: "500+", label: t("stats.members") },
     { icon: Calendar, value: "30+", label: t("stats.events") },
     { icon: Rocket, value: "15+", label: t("stats.projects") },
-<<<<<<< HEAD
-    { icon: Trees, value: "10000+", label: t("stats.treesPlanted") },
-=======
     { icon: Award, value: "1000+", label: t("stats.beneficiaries") },
->>>>>>> origin/master
   ];
 
   const upcomingEvents = [
@@ -137,11 +129,7 @@ const Index = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <div className="min-h-screen bg-background">
-=======
     <div className="min-h-screen bg-white">
->>>>>>> origin/master
       {/* Hero Section */}
       <SectionWrapper padding="xl" className="relative overflow-hidden">
         <div className="absolute inset-0 hero-gradient" />
@@ -292,51 +280,6 @@ const Index = () => {
         </div>
       </SectionWrapper>
 
-<<<<<<< HEAD
-      {/* Partners — fond #A5CEDD, texte blanc (référence design) */}
-      <section className="py-16 lg:py-20 bg-[#A5CEDD]">
-        <div className="section-wrapper">
-          <motion.h2
-            {...fadeInUpVariants}
-            className="font-display text-3xl md:text-4xl font-bold text-center text-white tracking-tight mb-10 md:mb-12"
-          >
-            {t("home.partnersTitle")}
-          </motion.h2>
-          <div className="relative overflow-hidden py-6">
-            <div className="flex w-max animate-scroll gap-5 md:gap-6 pr-5 md:pr-6">
-              {[...partners, ...partners].map((partner, i) => (
-                <div
-                  key={`${partner.name}-${i}`}
-                  className="flex flex-col items-center min-w-[200px] max-w-[220px] flex-shrink-0"
-                >
-                  <div className="w-full bg-white rounded-2xl border border-white/95 p-4 md:p-5 shadow-[0_12px_40px_rgba(15,55,80,0.12)] flex items-center justify-center min-h-[100px] mb-3">
-                    <img
-                      src={partner.logo}
-                      alt={partner.name}
-                      className="h-16 w-auto object-contain"
-                      style={{ maxWidth: 160 }}
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="text-center text-sm text-white/90 mb-2 font-medium px-1">
-                    {partner.description}
-                  </div>
-                  <a
-                    href={partner.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-white hover:text-white/85 underline underline-offset-4 flex items-center gap-1 text-xs font-medium"
-                  >
-                    <span>Visit website</span>
-                    <ExternalLink className="h-3 w-3" />
-                  </a>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-=======
       {/* Partners Section */}
       <SectionWrapper background="gray" padding="lg">
         <SectionHeading 
@@ -373,7 +316,6 @@ const Index = () => {
           </div>
         </div>
       </SectionWrapper>
->>>>>>> origin/master
 
       {/* Newsletter Section */}
       <SectionWrapper padding="xl" background="accent">
@@ -389,11 +331,7 @@ const Index = () => {
               value={newsletterEmail}
               onChange={(e) => setNewsletterEmail(e.target.value)}
               placeholder={t("home.emailPlaceholder")}
-<<<<<<< HEAD
-              className="flex-1 px-4 py-3 rounded-lg bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-transparent shadow-sm"
-=======
               className="flex-1 px-4 py-3 rounded-lg bg-white border border-gray-200 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent"
->>>>>>> origin/master
             />
             <CustomButton type="submit" disabled={subscribing} loading={subscribing}>
               {subscribing ? "..." : t("home.subscribe")}

@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || "http://localhost:1337";
-=======
 import { env } from "@/config/env";
 
 const STRAPI_URL = env.strapiUrl;
->>>>>>> origin/master
 
 type StrapiAuthOptions = {
   token?: string | null;
