@@ -29,15 +29,9 @@ const paddings = {
 };
 
 const backgrounds = {
-<<<<<<< HEAD
-  white: "bg-background",
-  gray: "bg-muted/70",
-  accent: "bg-gradient-to-br from-accent/50 via-background to-brand-periwinkle-soft/30",
-=======
   white: "bg-white",
   gray: "bg-gray-50",
   accent: "bg-accent/30"
->>>>>>> origin/master
 };
 
 const SectionWrapper = ({ 

@@ -15,13 +15,8 @@ export default {
     },
     extend: {
       fontFamily: {
-<<<<<<< HEAD
-        sans: ['"SN Pro"', 'system-ui', 'sans-serif'],
-        display: ['"SN Pro"', 'system-ui', 'sans-serif'],
-=======
         sans: ['Inter', 'system-ui', 'sans-serif'],
         display: ['Montserrat', 'Space Grotesk', 'system-ui', 'sans-serif'],
->>>>>>> origin/master
       },
       colors: {
         border: "hsl(var(--border))",
@@ -59,17 +54,6 @@ export default {
         },
         glow: "hsl(var(--glow))",
         "glow-purple": "hsl(var(--glow-purple))",
-<<<<<<< HEAD
-        brand: {
-          navy: "hsl(var(--brand-navy) / <alpha-value>)",
-          "navy-muted": "hsl(var(--brand-navy-muted) / <alpha-value>)",
-          gold: "hsl(var(--brand-gold) / <alpha-value>)",
-          periwinkle: "hsl(var(--brand-periwinkle) / <alpha-value>)",
-          "periwinkle-soft": "hsl(var(--brand-periwinkle-soft) / <alpha-value>)",
-          cloud: "hsl(var(--brand-cloud) / <alpha-value>)",
-        },
-=======
->>>>>>> origin/master
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
