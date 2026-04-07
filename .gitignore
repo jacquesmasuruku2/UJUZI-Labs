@@ -12,14 +12,11 @@ dist
 dist-ssr
 *.local
 
-<<<<<<< HEAD
-=======
 # Secrets & env local (le modèle documenté est .env.example)
 .env
 .env.*
 !.env.example
 
->>>>>>> origin/master
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
