@@ -29,7 +29,12 @@ const CustomButton = ({
   const baseStyles = "inline-flex items-center justify-center rounded-lg font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2";
   
   const variants = {
+<<<<<<< HEAD
+    primary:
+      "bg-primary text-primary-foreground hover:bg-primary/92 shadow-md hover:shadow-lg focus:ring-primary border border-black/[0.06]",
+=======
     primary: "bg-primary text-white hover:bg-primary/90 shadow-sm hover:shadow-md focus:ring-primary",
+>>>>>>> origin/master
     secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 focus:ring-secondary",
     outline: "border border-border bg-transparent hover:bg-accent hover:text-accent-foreground focus:ring-border"
   };

@@ -4,8 +4,13 @@
   bottom: 0;
   left: 0;
   width: 100%;
+<<<<<<< HEAD
+  background: linear-gradient(90deg, hsl(218 52% 8%), hsl(218 48% 11%));
+  border-top: 1px solid hsl(230 35% 35% / 0.25);
+=======
   background: linear-gradient(90deg, #000000, #0a0a0a);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+>>>>>>> origin/master
   z-index: 1000;
   overflow: hidden;
   height: 50px;
@@ -26,13 +31,21 @@
 }
 
 .marquee-text {
+<<<<<<< HEAD
+  font-family: "SN Pro", system-ui, sans-serif;
+=======
   font-family: 'Inter', 'Montserrat', system-ui, sans-serif;
+>>>>>>> origin/master
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   padding: 0 50px;
+<<<<<<< HEAD
+  background: linear-gradient(90deg, hsl(42 28% 96%) 0%, hsl(43 100% 50%) 42%, hsl(230 42% 72%) 70%, hsl(42 28% 96%) 100%);
+=======
   background: linear-gradient(90deg, #ffffff 0%, #ff4500 40%, #ffffff 80%);
+>>>>>>> origin/master
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

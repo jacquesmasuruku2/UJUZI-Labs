@@ -34,7 +34,11 @@
 
 /* Typographie */
 .section-title {
+<<<<<<< HEAD
+  font-family: "SN Pro", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+=======
   font-family: 'Inter', 'Montserrat', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+>>>>>>> origin/master
   font-weight: 700;
   font-size: 2.5em to 3em;
   color: var(--text-primary);
@@ -43,7 +47,11 @@
 }
 
 .section-subtitle {
+<<<<<<< HEAD
+  font-family: "SN Pro", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+=======
   font-family: 'Inter', 'Montserrat', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+>>>>>>> origin/master
   font-weight: 600;
   font-size: 1.8em;
   color: var(--text-primary);
@@ -51,7 +59,11 @@
 }
 
 .section-content {
+<<<<<<< HEAD
+  font-family: "SN Pro", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+=======
   font-family: 'Inter', 'Open Sans', 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+>>>>>>> origin/master
   font-weight: 400;
   font-size: 1em to 1.1em;
   color: var(--text-secondary);
@@ -77,7 +89,11 @@
   border: none;
   border-radius: var(--border-radius-btn);
   padding: 12px 25px;
+<<<<<<< HEAD
+  font-family: "SN Pro", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+=======
   font-family: 'Inter', 'Montserrat', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+>>>>>>> origin/master
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
@@ -141,7 +157,11 @@
 }
 
 .value-title {
+<<<<<<< HEAD
+  font-family: "SN Pro", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+=======
   font-family: 'Inter', 'Montserrat', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+>>>>>>> origin/master
   font-weight: 700;
   font-size: 1.5rem;
   color: var(--text-primary);
@@ -149,7 +169,11 @@
 }
 
 .value-description {
+<<<<<<< HEAD
+  font-family: "SN Pro", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+=======
   font-family: 'Inter', 'Open Sans', 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+>>>>>>> origin/master
   font-weight: 400;
   font-size: 0.95rem;
   color: var(--text-muted);
@@ -167,7 +191,11 @@
 }
 
 .vision-title {
+<<<<<<< HEAD
+  font-family: "SN Pro", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+=======
   font-family: 'Inter', 'Montserrat', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+>>>>>>> origin/master
   font-weight: 700;
   font-size: 2rem;
   color: var(--text-primary);
@@ -175,7 +203,11 @@
 }
 
 .vision-content {
+<<<<<<< HEAD
+  font-family: "SN Pro", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+=======
   font-family: 'Inter', 'Open Sans', 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+>>>>>>> origin/master
   font-weight: 400;
   font-size: 1.1rem;
   color: var(--text-secondary);
@@ -195,7 +227,11 @@
 }
 
 .objective-main-title {
+<<<<<<< HEAD
+  font-family: "SN Pro", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+=======
   font-family: 'Inter', 'Montserrat', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+>>>>>>> origin/master
   font-weight: 700;
   font-size: 2.5rem;
   color: var(--text-primary);
@@ -203,7 +239,11 @@
 }
 
 .objective-main-description {
+<<<<<<< HEAD
+  font-family: "SN Pro", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+=======
   font-family: 'Inter', 'Open Sans', 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+>>>>>>> origin/master
   font-weight: 400;
   font-size: 1.2rem;
   color: var(--text-secondary);

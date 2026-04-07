@@ -8,6 +8,8 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
+<<<<<<< HEAD
+=======
   ],
   "routes": [
     {
@@ -70,5 +72,6 @@
       "src": "/admin",
       "dest": "/index.html"
     }
+>>>>>>> origin/master
   ]
 }

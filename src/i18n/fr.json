@@ -2,6 +2,17 @@
   "nav": {
     "home": "Accueil",
     "about": "À propos",
+<<<<<<< HEAD
+    "presentation": "Qui sommes-nous?",
+    "services": "Services",
+    "team": "Équipe",
+    "ecosystem": "Écosystème",
+    "blockchains": "Blockchains",
+    "events": "Événements",
+    "projects": "Projets",
+    "community": "Communauté",
+    "joinOurCommunity": "Join our Community",
+=======
     "presentation": "Présentation",
     "services": "Services",
     "team": "Équipe",
@@ -9,18 +20,36 @@
     "events": "Événements",
     "projects": "Projets",
     "community": "Communauté",
+>>>>>>> origin/master
     "resources": "Ressources",
     "blog": "Blog",
     "documentation": "Documentation",
     "tools": "Outils",
     "gallery": "Gallery",
     "onboarding": "Onboarding Program",
+<<<<<<< HEAD
+    "genealogy": "Genealogy",
+    "mtidanoNftree": "Mtidano NFTree",
+    "stakepoolGoma": "Stakepool Goma",
+    "shirikiDrc": "Shiriki DRC",
+    "gomaHackathon": "Goma Hackathon",
+    "wenze": "Wenze",
+    "umojaFund": "UmojaFund",
+    "gomaHubHackathon": "Goma Hub Hackathon",
+=======
+>>>>>>> origin/master
     "onboardingWhat": "C'est quoi Onboarding program?",
     "impact": "Impact",
     "donate": "Donate",
     "partners": "Partenaires",
     "validators": "Validateurs",
     "contact": "Contact",
+<<<<<<< HEAD
+    "followUs": "Suivez-nous :",
+    "letsTalk": "Discutons",
+    "searchBlog": "Recherche blog",
+    "officeHours": "Dim – Ven (08h00 – 18h00)"
+=======
     "projectOnboarding": "Onboarding Program",
     "projectGenealogy": "Genealogy",
     "projectMtidano": "Mtidano",
@@ -28,6 +57,7 @@
     "projectGomaHackathon": "Goma Hackathon",
     "projectShririki": "Shririki DRC",
     "projectUmoja": "Umoja Fund"
+>>>>>>> origin/master
   },
   "hero": {
     "badge": "Hub d'Innovation Web3 — Afrique Centrale",
@@ -42,7 +72,11 @@
     "members": "Membres de la communauté",
     "events": "Événements organisés",
     "projects": "Projets incubés",
+<<<<<<< HEAD
+    "treesPlanted": "Arbres plantés"
+=======
     "beneficiaries": "Bénéficiaires"
+>>>>>>> origin/master
   },
   "home": {
     "whatTitle": "Qu'est-ce que UJUZI Labs ?",
@@ -51,18 +85,38 @@
     "learnMore": "En savoir plus",
     "upcomingTitle": "Événements à venir",
     "upcomingSubtitle": "Rejoignez-nous pour des ateliers, hackathons et meetups.",
+<<<<<<< HEAD
+    "registerNow": "S'inscrire maintenant",
+    "carouselPrevEvent": "Événement précédent",
+    "carouselNextEvent": "Événement suivant",
+=======
+>>>>>>> origin/master
     "register": "S'inscrire",
     "viewAllEvents": "Voir tous les événements",
     "projectsTitle": "Projets incubés",
     "projectsSubtitle": "Solutions innovantes construites par notre communauté.",
     "viewAllProjects": "Voir tous les projets",
     "partnersTitle": "Nos partenaires",
+<<<<<<< HEAD
+    "strategicPartners": "Partenaires stratégiques",
+=======
+>>>>>>> origin/master
     "newsletterTitle": "Restez informé",
     "newsletterSubtitle": "Abonnez-vous à notre newsletter pour les dernières nouvelles Web3 de Goma.",
     "emailPlaceholder": "Entrez votre email",
     "subscribe": "S'abonner",
     "subscribeSuccess": "Abonnement réussi !",
+<<<<<<< HEAD
+    "alreadySubscribed": "Vous êtes déjà abonné.",
+    "innovationMission": "Ujuzi Labs combine la technologie, l'éducation, l'agriculture et le développement durable pour bâtir un avenir innovant en RD Congo, en Afrique et sur l'échelle globale.",
+    "latestBlogTitle": "Dernières actualités",
+    "latestBlogSubtitle": "Articles récents depuis UJUZI Labs et l'écosystème Web3.",
+    "viewAllBlog": "Tous les articles",
+    "statsImpactPart1": "Des actions qui génèrent des",
+    "statsImpactPart2": "résultats tangibles"
+=======
     "alreadySubscribed": "Vous êtes déjà abonné."
+>>>>>>> origin/master
   },
   "about": {
     "title": "À propos de",
@@ -100,6 +154,15 @@
     "registrationClosed": "Inscriptions fermées",
     "eventAlreadyPassed": "Cet événement a déjà eu lieu. Les inscriptions ne sont plus disponibles.",
     "backToEvents": "Retour aux événements",
+<<<<<<< HEAD
+    "onLuma": "Nos événements sur Luma",
+    "lumaTitle": "Nos événements sur Luma",
+    "lumaSubtitle": "Retrouvez nos prochaines sessions et inscrivez-vous directement sur Luma.",
+    "lumaCta": "Ouvrir la page Luma",
+    "lumaMissingUrl": "URL Luma non configurée. Ajoutez VITE_LUMA_EVENTS_URL dans votre fichier .env.",
+    "lumaEmbedNotAvailable": "Luma bloque l’intégration dans un iframe sur certains navigateurs. Ouvrez le calendrier dans un nouvel onglet.",
+=======
+>>>>>>> origin/master
     "notFound": "Événement introuvable.",
     "noDescription": "Aucune description disponible.",
     "dateLabel": "Date",
@@ -131,6 +194,8 @@
     "subtitle": "Solutions Web3 innovantes construites et incubées par UJUZI Labs.",
     "all": "Tous",
     "viewProject": "Voir le projet",
+<<<<<<< HEAD
+=======
     "openProject": "Ouvrir le projet",
     "custom": {
       "onboardingDesc": "Programme d'intégration Web3 de UJUZI Labs avec sessions pratiques, accompagnement et impact communautaire.",
@@ -141,6 +206,7 @@
       "shririkiDesc": "Initiative collaborative pour renforcer la cohésion sociale, les talents locaux et les opportunités d'impact.",
       "umojaDesc": "Mécanisme communautaire de financement pour soutenir les projets à fort impact social et économique."
     },
+>>>>>>> origin/master
     "proj1Desc": "Solution de paiement décentralisée permettant aux commerçants de l'Est du Congo d'accepter les paiements crypto.",
     "proj2Desc": "Diplômes universitaires vérifiés par blockchain pour les universités congolaises, luttant contre la fraude.",
     "proj3Desc": "Plateforme de gouvernance communautaire pour la surveillance environnementale du Nyiragongo.",
@@ -154,6 +220,11 @@
     "subtitle": "Faites partie de la communauté Web3 à la croissance la plus rapide en Afrique Centrale.",
     "howTitle": "Comment rejoindre",
     "howSubtitle": "Impliquez-vous dans l'écosystème UJUZI Labs.",
+<<<<<<< HEAD
+    "whatsapp": "WhatsApp",
+    "whatsappDesc": "Rejoignez notre groupe WhatsApp pour les annonces, questions et échanges au quotidien.",
+=======
+>>>>>>> origin/master
     "discord": "Rejoindre Discord",
     "discordDesc": "Connectez-vous avec les builders, posez des questions et collaborez sur des projets.",
     "telegram": "Rejoindre Telegram",
@@ -167,6 +238,11 @@
     "applyNow": "Postuler maintenant",
     "voicesTitle": "Voix de la communauté",
     "voicesSubtitle": "Ce que disent nos membres.",
+<<<<<<< HEAD
+    "readMore": "Lire la suite",
+    "readLess": "Réduire",
+=======
+>>>>>>> origin/master
     "test1": "UJUZI Labs m'a donné les compétences et le réseau pour lancer ma première DApp. La communauté ici est incroyable !",
     "test2": "Avant UJUZI Labs, la blockchain semblait impossible à apprendre. Maintenant je construis des smart contracts !",
     "test3": "Le programme d'incubation m'a aidé à transformer mon idée en un projet financé. Éternellement reconnaissant."
@@ -195,7 +271,14 @@
     "r8Title": "Bases de la sécurité Blockchain",
     "r8Desc": "Pratiques de sécurité essentielles pour le développement de smart contracts.",
     "r9Title": "Guide de Tokenomics",
+<<<<<<< HEAD
+    "r9Desc": "Comprendre l'économie et la conception des tokens.",
+    "galleryTitle": "Galerie du Hub",
+    "gallerySubtitle": "Quelques moments clés de UJUZI Labs Web3 : événements, ateliers et temps forts avec la communauté.",
+    "galleryExplore": "Explorer"
+=======
     "r9Desc": "Comprendre l'économie et la conception des tokens."
+>>>>>>> origin/master
   },
   "onboarding": {
     "title": "Onboarding Program",
@@ -206,7 +289,10 @@
     "impactDesc": "Ce programme améliore la rétention des membres, accélère l'apprentissage pratique et augmente le nombre de participants qui passent à l'action sur des projets concrets.",
     "donateTitle": "Donate",
     "donateDesc": "Vos contributions nous permettent de financer les sessions d'introduction, les supports pédagogiques et l'accompagnement des nouveaux participants.",
+<<<<<<< HEAD
+=======
     "storyTitle": "Web3 Onboarding Program",
+>>>>>>> origin/master
     "storyText": "Depuis 2023, Ujuzi Labs a identifié un besoin d'éducation sur le Web3, et la blockchain Cardano en particulier. Cela nous a poussé à initier ce programme à travers lequel, chaque fin du mois, nous mobilisons nos petites ressources disponibles et recrutons des jeunes entrepreneurs, étudiants et passionnés de technologie pour leur offrir une formation d'une semaine sur des notions comme le Web3, la technologie des registres distribués, la blockchain, les portefeuilles Cardano et d'autres fondamentaux utiles à leur parcours.",
     "stats": {
       "cohorts": "Cohortes",
@@ -238,6 +324,8 @@
     "cryptoTitle": "Via Crypto (Cardano)",
     "cryptoHow": "Connecte ton wallet Cardano, choisis le montant de ton soutien, puis confirme la transaction. Une fois validé, ta contribution sera prise en compte pour financer les prochaines cohortes.",
     "donateButton": "Donate"
+<<<<<<< HEAD
+=======
     ,
     "donateForm": {
       "mobileHelp": "Remplissez les informations ci-dessous pour finaliser votre don via Mobile Money.",
@@ -300,6 +388,7 @@
       "beneficiaries": "Bénéficiaires directs",
       "years": "Années d’activité"
     }
+>>>>>>> origin/master
   },
   "blog": {
     "title": "Blog & Actualités",
@@ -363,6 +452,11 @@
     "becomeSubtitle": "Rejoignez notre réseau d'organisations qui construisent le Web3 en Afrique Centrale.",
     "getInTouch": "Nous contacter",
     "visit": "Visiter",
+<<<<<<< HEAD
+    "continueBelow": "Aller au formulaire partenaire ci-dessous",
+    "visitWebsite": "Visiter le site",
+=======
+>>>>>>> origin/master
     "p1Desc": "Soutien à l'éducation blockchain et au développement Cardano en Afrique Centrale.",
     "p2Desc": "Partenaire d'infrastructure fournissant des solutions cross-chain.",
     "p3Desc": "Infrastructure et outils blockchain axés sur l'Afrique.",
@@ -400,7 +494,24 @@
     "validator": "Validateur",
     "uptime": "Disponibilité",
     "region": "Région",
+<<<<<<< HEAD
+    "centralAfrica": "Afrique Centrale",
+    "delegateHelp": "Déléguez pour sécuriser le réseau et renforcer la décentralisation depuis l'Afrique Centrale.",
+    "cardanoPoolTitle": "Pool GOMA en RDC",
+    "delegations": "Délégations",
+    "saturation": "Saturation",
+    "margin": "Marge",
+    "fixedCost": "Coût fixe",
+    "blocks": "Blocs",
+    "epoch": "Époque",
+    "timeLeft": "environ 12 heures restantes",
+    "delegationProgress": "> 1,000 ADA",
+    "nextBlock": "1 bloc",
+    "activeOn": "Actif sur {{chain}}",
+    "exploreDelegate": "explore and delagate"
+=======
     "centralAfrica": "Afrique Centrale"
+>>>>>>> origin/master
   },
   "footer": {
     "desc": "Construire le futur du Web3 à Goma, RDC. Un centre d'innovation blockchain en Afrique Centrale.",
