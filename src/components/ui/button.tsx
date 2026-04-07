@@ -16,7 +16,11 @@ const buttonVariants = cva(
           "border border-border bg-transparent text-foreground hover:bg-muted hover:text-foreground hover:scale-[1.03]",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/85 hover:scale-[1.02]",
+<<<<<<< HEAD
         ghost: "hover:bg-muted/80 hover:text-foreground dark:hover:bg-white/10",
+=======
+        ghost: "hover:bg-white/10 hover:text-foreground",
+>>>>>>> origin/master
         link: "text-primary underline-offset-4 hover:underline hover:scale-100",
         glow:
           "bg-primary text-primary-foreground glow-cyan font-display font-semibold tracking-wide hover:scale-[1.05] hover:brightness-110 active:scale-[0.98]",

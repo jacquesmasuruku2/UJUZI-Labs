@@ -14,12 +14,21 @@
   border-bottom: 2px solid #00ff88;
 }
 
+<<<<<<< HEAD
 /* Mode clair : même univers que le hero vidéo (fond marine, accents type bandeau sombre) */
 .light .ticker-container {
   background: hsl(218 52% 11%);
   color: hsl(165 90% 48%);
   border-top-color: hsl(165 65% 42%);
   border-bottom-color: hsl(165 65% 42%);
+=======
+/* Mode clair : bande lisible (texte foncé sur fond clair) */
+.light .ticker-container {
+  background: hsl(40 25% 96%);
+  color: hsl(16 100% 38%);
+  border-top-color: hsl(16 100% 48%);
+  border-bottom-color: hsl(16 100% 48%);
+>>>>>>> origin/master
 }
 
 .ticker-content {
@@ -30,7 +39,11 @@
 }
 
 .ticker-text {
+<<<<<<< HEAD
   font-family: "SN Pro", system-ui, "Segoe UI", sans-serif;
+=======
+  font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+>>>>>>> origin/master
   font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
@@ -41,8 +54,13 @@
 }
 
 .light .ticker-text {
+<<<<<<< HEAD
   color: hsl(165 88% 52%);
   text-shadow: 0 0 10px rgba(0, 200, 160, 0.35);
+=======
+  color: hsl(16 100% 36%);
+  text-shadow: none;
+>>>>>>> origin/master
 }
 
 @keyframes scroll-left {

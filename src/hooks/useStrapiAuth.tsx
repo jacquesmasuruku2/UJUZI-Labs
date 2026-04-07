@@ -1,4 +1,8 @@
 import { createContext, useContext, useEffect, useMemo, useState, ReactNode } from "react";
+<<<<<<< HEAD
+=======
+import { env } from "@/config/env";
+>>>>>>> origin/master
 import { strapiFetch, clearJwtFromStorage, getJwtFromStorage, setJwtToStorage } from "@/lib/strapi";
 
 type StrapiUser = {
@@ -31,9 +35,13 @@ export const StrapiAuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
+<<<<<<< HEAD
   const adminRoleName = useMemo(() => {
     return import.meta.env.VITE_STRAPI_ADMIN_ROLE || "Administrator";
   }, []);
+=======
+  const adminRoleName = useMemo(() => env.strapiAdminRole, []);
+>>>>>>> origin/master
 
   const refreshMe = async () => {
     const token = getJwtFromStorage();

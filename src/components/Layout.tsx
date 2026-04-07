@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
@@ -26,3 +27,10 @@ const Layout = ({ children }: { children: ReactNode }) => {
 };
 
 export default Layout;
+=======
+/**
+ * Point de compatibilité : le layout racine vit dans `layouts/RootLayout`.
+ * Garde les imports existants du type `import Layout from "@/components/Layout"`.
+ */
+export { RootLayout as default, RootLayout } from "@/layouts/RootLayout";
+>>>>>>> origin/master

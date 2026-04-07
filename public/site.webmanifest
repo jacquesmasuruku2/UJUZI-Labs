@@ -1,0 +1,10 @@
+{
+  "name": "UJUZI Labs",
+  "short_name": "UJUZI",
+  "description": "Innovation Web3 in DR Congo",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#ff4500",
+  "lang": "en"
+}
